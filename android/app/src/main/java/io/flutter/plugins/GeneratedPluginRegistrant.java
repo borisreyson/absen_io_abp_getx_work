@@ -16,11 +16,6 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
-      flutterEngine.getPlugins().add(new com.Mrblueskyai.alarmplayer.AlarmplayerPlugin());
-    } catch(Exception e) {
-      Log.e(TAG, "Error registering plugin alarmplayer, com.Mrblueskyai.alarmplayer.AlarmplayerPlugin", e);
-    }
-    try {
       flutterEngine.getPlugins().add(new com.github.florent37.assets_audio_player.AssetsAudioPlayerPlugin());
     } catch(Exception e) {
       Log.e(TAG, "Error registering plugin assets_audio_player, com.github.florent37.assets_audio_player.AssetsAudioPlayerPlugin", e);
