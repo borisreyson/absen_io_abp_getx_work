@@ -1,0 +1,7 @@
+Executable : /Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/x86
+convertImage
+jvmArgs : 
+

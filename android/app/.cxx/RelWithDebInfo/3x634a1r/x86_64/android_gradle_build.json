@@ -1,0 +1,40 @@
+{
+  "stringTable": {},
+  "buildFiles": [
+    "/Users/borisreyson/StudioProjects/face_id_plus/android/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-C",
+      "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-C",
+    "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "convertImage-RelWithDebInfo-x86_64": {
+      "buildCommandComponents": [
+        "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/x86_64",
+        "convertImage"
+      ],
+      "buildType": "release",
+      "abi": "x86_64",
+      "artifactName": "convertImage",
+      "output": "/Users/borisreyson/StudioProjects/face_id_plus/build/app/intermediates/cxx/RelWithDebInfo/3x634a1r/obj/x86_64/libconvertImage.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {},
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

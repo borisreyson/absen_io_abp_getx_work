@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "86282435168",
+    "project_id": "flutter-midev",
+    "storage_bucket": "flutter-midev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86282435168:android:45e264cdabed0fdcfbe105",
+        "android_client_info": {
+          "package_name": "com.misit.faceidplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86282435168-sr7und1coohbeatua4852ch0k40be2n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDENCy1_N9lOgJqnOnTzsZpLUQQzr1-l_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86282435168-sr7und1coohbeatua4852ch0k40be2n0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "86282435168-ioumrh78dnvim31lbsnikn7apa6a4v5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.misit.faceidplus"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,4 @@
+# ninja log v5
+1	146	1657252487	CMakeFiles/convertImage.dir/Users/borisreyson/StudioProjects/absen_io_abp_getx/ios/Classes/converter.c.o	843979b9f518c2d0
+147	246	1657252487	/Users/borisreyson/StudioProjects/absen_io_abp_getx/build/app/intermediates/cxx/Debug/426n256h/obj/armeabi-v7a/libconvertImage.so	c234c16b292d515c
+2	148	1657258204	/Users/borisreyson/StudioProjects/absen_io_abp_getx/build/app/intermediates/cxx/Debug/426n256h/obj/armeabi-v7a/libconvertImage.so	c234c16b292d515c

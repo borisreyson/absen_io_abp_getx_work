@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/Debug/v306g1k1/x86_64'
+ninja: no work to do.

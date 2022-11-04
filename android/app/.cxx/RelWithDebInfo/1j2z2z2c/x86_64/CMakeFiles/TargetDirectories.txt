@@ -1,0 +1,3 @@
+/Users/borisreyson/development/absen_io_abp/android/app/.cxx/RelWithDebInfo/1j2z2z2c/x86_64/CMakeFiles/rebuild_cache.dir
+/Users/borisreyson/development/absen_io_abp/android/app/.cxx/RelWithDebInfo/1j2z2z2c/x86_64/CMakeFiles/edit_cache.dir
+/Users/borisreyson/development/absen_io_abp/android/app/.cxx/RelWithDebInfo/1j2z2z2c/x86_64/CMakeFiles/convertImage.dir

@@ -1,0 +1,7 @@
+# ninja log v5
+1	142	1643768552	CMakeFiles/convertImage.dir/Users/borisreyson/StudioProjects/face_id_plus/ios/Classes/converter.c.o	b78cb0523fcbd68d
+142	224	1643768553	/Users/borisreyson/StudioProjects/face_id_plus/build/app/intermediates/cxx/RelWithDebInfo/3x634a1r/obj/arm64-v8a/libconvertImage.so	616e87a59f27dab9
+0	13	0	clean	bbff04781a28f001
+0	12	0	clean	bbff04781a28f001
+0	100	1644316304	CMakeFiles/convertImage.dir/Users/borisreyson/StudioProjects/face_id_plus/ios/Classes/converter.c.o	b78cb0523fcbd68d
+100	182	1644316304	/Users/borisreyson/StudioProjects/face_id_plus/build/app/intermediates/cxx/RelWithDebInfo/3x634a1r/obj/arm64-v8a/libconvertImage.so	616e87a59f27dab9

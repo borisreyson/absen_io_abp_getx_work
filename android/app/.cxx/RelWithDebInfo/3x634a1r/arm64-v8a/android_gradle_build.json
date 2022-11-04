@@ -1,0 +1,40 @@
+{
+  "stringTable": {},
+  "buildFiles": [
+    "/Users/borisreyson/StudioProjects/face_id_plus/android/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-C",
+      "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-C",
+    "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "convertImage-RelWithDebInfo-arm64-v8a": {
+      "buildCommandComponents": [
+        "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/RelWithDebInfo/3x634a1r/arm64-v8a",
+        "convertImage"
+      ],
+      "buildType": "release",
+      "abi": "arm64-v8a",
+      "artifactName": "convertImage",
+      "output": "/Users/borisreyson/StudioProjects/face_id_plus/build/app/intermediates/cxx/RelWithDebInfo/3x634a1r/obj/arm64-v8a/libconvertImage.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {},
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

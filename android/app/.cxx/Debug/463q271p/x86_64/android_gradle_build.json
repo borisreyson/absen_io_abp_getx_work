@@ -1,0 +1,40 @@
+{
+  "stringTable": {},
+  "buildFiles": [
+    "/Users/borisreyson/StudioProjects/face_id_plus/android/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-C",
+      "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/Debug/463q271p/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-C",
+    "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/Debug/463q271p/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "convertImage-Debug-x86_64": {
+      "buildCommandComponents": [
+        "/Users/borisreyson/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-C",
+        "/Users/borisreyson/StudioProjects/face_id_plus/android/app/.cxx/Debug/463q271p/x86_64",
+        "convertImage"
+      ],
+      "buildType": "debug",
+      "abi": "x86_64",
+      "artifactName": "convertImage",
+      "output": "/Users/borisreyson/StudioProjects/face_id_plus/build/app/intermediates/cxx/Debug/463q271p/obj/x86_64/libconvertImage.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {},
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}
