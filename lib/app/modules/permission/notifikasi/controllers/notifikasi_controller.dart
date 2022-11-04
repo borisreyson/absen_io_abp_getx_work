@@ -1,0 +1,12 @@
+import 'package:get/get.dart';
+
+class NotifikasiController extends GetxController {
+  //TODO: Implement NotifikasiController
+
+  final count = 0.obs;
+
+
+  @override
+  void onClose() {}
+  void increment() => count.value++;
+}
