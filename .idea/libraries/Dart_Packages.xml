@@ -16,13 +16,6 @@
             </list>
           </value>
         </entry>
-        <entry key="alarmplayer">
-          <value>
-            <list>
-              <option value="$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/alarmplayer-1.0.4/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="analyzer">
           <value>
             <list>
@@ -1604,7 +1597,6 @@
       <root url="file://$USER_HOME$/Development/flutter/.pub-cache/git/flutter_datetime_picker-eb66486c47d50bf550950c196486121ffcea8885//lib" />
       <root url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-49.0.0/lib" />
       <root url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/_flutterfire_internals-1.0.4/lib" />
-      <root url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/alarmplayer-1.0.4/lib" />
       <root url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-5.1.0/lib" />
       <root url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/ansicolor-2.0.1/lib" />
       <root url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.2/lib" />
