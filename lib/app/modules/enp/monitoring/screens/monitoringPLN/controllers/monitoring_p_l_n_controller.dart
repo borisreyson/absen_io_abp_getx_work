@@ -57,6 +57,7 @@ class MonitoringPLNController extends GetxController {
   fetchPLN(int pages) async {
     var load = provider.getPLN(pages);
     await load.then((value) {
+      // ignore: unnecessary_null_comparison
       if (value != null) {
         var berhasil = value.success;
         var ob = value.monitoringPLN;

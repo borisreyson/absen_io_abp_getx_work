@@ -18,7 +18,7 @@ class ProfileController extends GetxController {
     var pref = await SharedPreferences.getInstance();
     nama.value = pref.getString(Constants.namaAbsen);
     nik.value = pref.getString(Constants.nikAbsen);
-    foto.value = pref.getString(Constants.fotoProfile);
+    foto.value = pref.getString(Constants.fotoProfileAbsen);
   }
 
   logOut() async {
@@ -26,7 +26,7 @@ class ProfileController extends GetxController {
     if (await pref.remove(Constants.isLogin) &&
         await pref.remove(Constants.nikAbsen) &&
         await pref.remove(Constants.namaAbsen) &&
-        await pref.remove(Constants.fotoProfile)) {
+        await pref.remove(Constants.fotoProfileAbsen)) {
       Get.back(result: true);
     }
   }

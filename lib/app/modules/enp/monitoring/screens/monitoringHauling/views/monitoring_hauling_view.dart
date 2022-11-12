@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:face_id_plus/app/data/models/model_hauling.dart';
 import 'package:face_id_plus/app/data/utils/bg.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class MonitoringHaulingView extends GetView<MonitoringHaulingController> {
             },
           ),
           actions: [
-             IconButton(
+            IconButton(
               onPressed: () {
                 bottomDialog(context);
               },
@@ -72,8 +74,9 @@ class MonitoringHaulingView extends GetView<MonitoringHaulingController> {
         backgroundColor: Color.fromARGB(255, 32, 72, 142),
       ),
       child: ListView(
-        children:
-            controller.dataHauling.map((element) => contentHauling(element)).toList(),
+        children: controller.dataHauling
+            .map((element) => contentHauling(element))
+            .toList(),
       ),
     );
   }
@@ -404,7 +407,7 @@ class MonitoringHaulingView extends GetView<MonitoringHaulingController> {
 
   bottomDialog(context) {
     return showModalBottomSheet(
-        backgroundColor: Colors.transparent, 
+        backgroundColor: Colors.transparent,
         useRootNavigator: true,
         context: context,
         builder: (context) {

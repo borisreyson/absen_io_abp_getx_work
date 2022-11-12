@@ -8,6 +8,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../controllers/monitoring_p_l_n_controller.dart';
 
 class MonitoringPLNView extends GetView<MonitoringPLNController> {
+  const MonitoringPLNView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -29,7 +31,7 @@ class MonitoringPLNView extends GetView<MonitoringPLNController> {
         ),
         body: Stack(
           children: <Widget>[
-            BackgroundM(),
+            const BackgroundM(),
             Column(
               children: [
                 // bagianTgl(context),
@@ -105,48 +107,48 @@ class MonitoringPLNView extends GetView<MonitoringPLNController> {
               ),
               const SizedBox(height: 10),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        const Text(
-                          "Actual Daily",
-                          style: TextStyle(
-                              color: Colors.grey, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          ad,
-                          style: const TextStyle(
-                              color: Colors.orange,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        const Text(
-                          "MTD Actual",
-                          style: TextStyle(
-                              color: Colors.grey, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          ma,
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 33, 120, 36),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      const Text(
+                        "Actual Daily",
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        ad,
+                        style: const TextStyle(
+                            color: Colors.orange,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const Text(
+                        "MTD Actual",
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        ma,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 33, 120, 36),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
         ),

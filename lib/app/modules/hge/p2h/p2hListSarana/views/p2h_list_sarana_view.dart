@@ -68,35 +68,16 @@ class P2hListSaranaView extends GetView<P2hListSaranaController> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 30,
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Get.toNamed(Routes.SCAN_SARANA_P2_H,
-                              arguments: {"data": e});
-                        },
-                        label: const Text("Form P2H"),
-                        icon: const Icon(CupertinoIcons.qrcode_viewfinder),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 30,
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Get.toNamed(Routes.FROM_P2_H, arguments: {"data": e});
-                        },
-                        label: const Text("Form P2H Manual"),
-                        icon: const Icon(CupertinoIcons.doc_text),
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 30,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      // Get.toNamed(Routes.FROM_P2_H, arguments: {"data": e});
+                      Get.toNamed(Routes.MENU_FORM_P2H, arguments: {"data": e});
+                    },
+                    label: const Text("Form P2H"),
+                    icon: const Icon(CupertinoIcons.doc_text),
+                  ),
                 ),
                 SizedBox(
                   width: 130,

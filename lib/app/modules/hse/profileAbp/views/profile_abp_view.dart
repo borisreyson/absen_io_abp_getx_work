@@ -84,6 +84,7 @@ class ProfileAbpView extends GetView<ProfileAbpController> {
   }
 
   Widget foto() {
+    print("foto ${controller.foto.value}");
     return Container(
       child: (controller.foto.value != null)
           ? InkWell(
@@ -196,56 +197,56 @@ class ProfileAbpView extends GetView<ProfileAbpController> {
             ),
           ),
         ),
-        Card(
-          margin: const EdgeInsets.all(5),
-          elevation: 5,
-          child: InkWell(
-            onTap: () async {
-              await Get.toNamed(Routes.RUBAH_DATA);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Icon(CupertinoIcons.person_crop_circle_fill_badge_exclam),
-                  Text(
-                    "Rubah Data",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-        Card(
-          margin: const EdgeInsets.all(5),
-          elevation: 5,
-          child: InkWell(
-            onTap: () async {
-              await Get.toNamed(Routes.ALARM_PLAYER);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Icon(CupertinoIcons.alarm),
-                  Text(
-                    "Alaram",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
+        // Card(
+        //   margin: const EdgeInsets.all(5),
+        //   elevation: 5,
+        //   child: InkWell(
+        //     onTap: () async {
+        //       await Get.toNamed(Routes.RUBAH_DATA);
+        //     },
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(10),
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: const [
+        //           Icon(CupertinoIcons.person_crop_circle_fill_badge_exclam),
+        //           Text(
+        //             "Rubah Data",
+        //             style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontSize: 16,
+        //                 fontWeight: FontWeight.bold),
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // Card(
+        //   margin: const EdgeInsets.all(5),
+        //   elevation: 5,
+        //   child: InkWell(
+        //     onTap: () async {
+        //       await Get.toNamed(Routes.ALARM_PLAYER);
+        //     },
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(10),
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: const [
+        //           Icon(CupertinoIcons.alarm),
+        //           Text(
+        //             "Alaram",
+        //             style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontSize: 16,
+        //                 fontWeight: FontWeight.bold),
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Card(
           margin: const EdgeInsets.all(5),
           elevation: 5,

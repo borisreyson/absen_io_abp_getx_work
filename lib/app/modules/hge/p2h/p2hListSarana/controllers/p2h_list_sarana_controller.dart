@@ -1,7 +1,6 @@
 import 'package:face_id_plus/app/data/providers/sarana_provider.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import '../../../../../data/models/listSaranaHeader.dart';
 
 class P2hListSaranaController extends GetxController {

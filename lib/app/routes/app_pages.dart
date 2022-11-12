@@ -63,6 +63,8 @@ import '../modules/hge/cuti/tanggalCuti/views/tanggal_cuti_view.dart';
 import '../modules/hge/listKaryawan/bindings/list_karyawan_binding.dart';
 import '../modules/hge/listKaryawan/views/list_karyawan_view.dart';
 import '../modules/hge/p2h/bindings/p2h_binding.dart';
+import '../modules/hge/p2h/daftarP2hHarian/bindings/daftar_p2h_harian_binding.dart';
+import '../modules/hge/p2h/daftarP2hHarian/views/daftar_p2h_harian_view.dart';
 import '../modules/hge/p2h/daftarPemeriksaanP2H/bindings/daftar_pemeriksaan_p2_h_binding.dart';
 import '../modules/hge/p2h/daftarPemeriksaanP2H/views/daftar_pemeriksaan_p2_h_view.dart';
 import '../modules/hge/p2h/detailPemeriksaanP2H/bindings/detail_pemeriksaan_p2_h_binding.dart';
@@ -81,6 +83,8 @@ import '../modules/hge/p2h/listP2hSarpras/bindings/list_p2h_sarpras_binding.dart
 import '../modules/hge/p2h/listP2hSarpras/views/list_p2h_sarpras_view.dart';
 import '../modules/hge/p2h/listPemeriksaanP2H/bindings/list_pemeriksaan_p2_h_binding.dart';
 import '../modules/hge/p2h/listPemeriksaanP2H/views/list_pemeriksaan_p2_h_view.dart';
+import '../modules/hge/p2h/menuFormP2h/bindings/menu_form_p2h_binding.dart';
+import '../modules/hge/p2h/menuFormP2h/views/menu_form_p2h_view.dart';
 import '../modules/hge/p2h/menuP2H/bindings/menu_p2_h_binding.dart';
 import '../modules/hge/p2h/menuP2H/views/menu_p2_h_view.dart';
 import '../modules/hge/p2h/p2hDetail/bindings/p2h_detail_binding.dart';
@@ -814,6 +818,16 @@ class AppPages {
           name: _Paths.P2H_LIST_SARANA_SARPRAS,
           page: () => const P2hListSaranaSarprasView(),
           binding: P2hListSaranaSarprasBinding(),
+        ),
+        GetPage(
+          name: _Paths.DAFTAR_P2H_HARIAN,
+          page: () => const DaftarP2hHarianView(),
+          binding: DaftarP2hHarianBinding(),
+        ),
+        GetPage(
+          name: _Paths.MENU_FORM_P2H,
+          page: () => const MenuFormP2hView(),
+          binding: MenuFormP2hBinding(),
         ),
       ],
     ),

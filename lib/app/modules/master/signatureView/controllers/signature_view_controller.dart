@@ -9,6 +9,11 @@ class SignatureViewController extends GetxController {
   final loaded = false.obs;
   @override
   void onInit() async {
+    getPref();
+    super.onInit();
+  }
+
+  getPref() async {
     var pref = await SharedPreferences.getInstance();
     imageData.value = pref.getString(Constants.ttd);
     if (imageData.value == null) {
@@ -16,6 +21,5 @@ class SignatureViewController extends GetxController {
     } else {
       loaded.value = true;
     }
-    super.onInit();
   }
 }

@@ -412,7 +412,7 @@ class DetaiCutiView extends GetView<DetaiCutiController> {
                     : Colors.red,
               ),
             ),
-            if (e.kttVerifikasi != null)
+            if (e.atasanVerifikasi != null)
               CachedNetworkImage(
                 imageUrl: "https://abpjobsite.com/ttd/${e.ttdAtasan}",
                 height: 50,

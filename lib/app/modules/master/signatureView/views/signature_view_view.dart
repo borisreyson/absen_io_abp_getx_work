@@ -38,6 +38,9 @@ class SignatureViewView extends GetView<SignatureViewController> {
     return FloatingActionButton.extended(
       onPressed: () async {
         var res = await Get.toNamed(Routes.SIGNATURE_CREATE);
+        if (res != null) {
+          controller.getPref();
+        }
       },
       label: const Text("Rubah Tanda Tangan"),
       icon: const Icon(CupertinoIcons.signature),

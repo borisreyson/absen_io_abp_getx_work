@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -92,9 +91,10 @@ class DaftarPemeriksaanP2HController extends GetxController
         var p2hModels = P2HDataModels();
         p2hModels.saranaHeader = dataHeader.value;
         p2hModels.pemeriksaan = value;
-
         await provider.postDataP2h(p2hModels).then((v) async {
           if (v.success!) {
+            print("saranaHeader ${p2hModels.pemeriksaan?.length}");
+
             await service.deletAll();
             await serviceKondisi.deletAll();
             await serviceTemuan.deletAll();

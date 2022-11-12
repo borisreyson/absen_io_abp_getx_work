@@ -71,6 +71,13 @@ class Provider extends GetConnect {
         "https://lp.abpjobsite.com/api/v1/login", loginABP.toJson());
   }
 
+  Future<AuthModel?> loginAbpPost(LoginABP loginABP) async {
+    String apiUrl = "https://lp.abpjobsite.com/api/v1/login";
+    var apiResult = await http.post(Uri.parse(apiUrl), body: loginABP.toJson());
+    var jsonObject = json.decode(apiResult.body);
+    return AuthModel.fromJson(jsonObject);
+  }
+
   Future<AbsenList> listAbsensiUser({String? nik, String? status, page}) async {
     String apiUrl =
         "https://abpjobsite.com/api/android/get/list/absen?nik=$nik&status=$status&page=$page";

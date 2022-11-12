@@ -31,12 +31,22 @@ class LoginController extends GetxController {
       var loginABP = LoginABP();
       loginABP.username = userController.text;
       loginABP.password = passController.text;
-      await _provider.login(loginABP).then((value) {
-        AuthModel authModel = AuthModel.fromJson(value.body);
-        if (authModel.login != null) {
-          if (authModel.login!.success!) {
-            var user = authModel.login!.user;
-            _setPref(user!);
+      await _provider.loginAbpPost(loginABP).then((value) {
+        print(value);
+        var authModel = value;
+        if (authModel != null) {
+          if (authModel.login != null) {
+            if (authModel.login!.success!) {
+              var user = authModel.login!.user;
+              _setPref(user!);
+            } else {
+              Get.snackbar(
+                  "Error Login", "Username Dan Password Salah, Coba Lagi");
+              roundBtn.error();
+              Future.delayed(const Duration(milliseconds: 1500), () {
+                roundBtn.reset();
+              });
+            }
           } else {
             Get.snackbar(
                 "Error Login", "Username Dan Password Salah, Coba Lagi");

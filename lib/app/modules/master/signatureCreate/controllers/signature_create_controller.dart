@@ -1,7 +1,6 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:face_id_plus/app/data/utils/constants.dart';
+import 'package:face_id_plus/app/modules/master/models/result_models.dart';
 import 'package:face_id_plus/app/modules/master/provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +22,7 @@ class SignatureCreateController extends GetxController {
   File? foto;
   final username = RxnString(null);
   final nik = RxnString(null);
+  var url = "https://abpjobsite.com/ttd/";
 
   @override
   void onInit() async {
@@ -99,10 +99,25 @@ class SignatureCreateController extends GetxController {
 
   void simpanGambar() async {
     exportImage = await signatureController.value.toPngBytes();
+    DateTime dt = DateTime.now();
+
+    String filename =
+        "${"${dt.hour}".padLeft(2, "0")}${"${dt.minute}".padLeft(2, "0")}${"${dt.second}".padLeft(2, "0")}_${username.value}_TTD.png";
+
     var temp = await getTemporaryDirectory();
-    foto = await File('${temp.path}/ttd_${username.value}_${nik.value}.png')
-        .create();
+    foto = await File('${temp.path}/$filename').create();
     foto!.writeAsBytesSync(exportImage!);
     print("foto ${foto?.path}");
+    var data = PostTtdModels();
+    data.username = username.value;
+    data.ttd = foto;
+    await userProvider.postTTD(data).then((value) async {
+      var res = value?.success;
+      if (res!) {
+        var pref = await SharedPreferences.getInstance();
+        pref.setString(Constants.ttd, filename);
+        Get.back(result: true);
+      }
+    });
   }
 }

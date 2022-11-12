@@ -1,3 +1,6 @@
+// ignore_for_file: unnecessary_null_comparison
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -43,10 +46,10 @@ class MonitoringStockProductController extends GetxController {
     if (page.value < totalPage.value) {
       page.value++;
       fetchStockRom(
-      page.value,
-      fmt.value.format(dari!),
-      fmt.value.format(sampai!),
-    );
+        page.value,
+        fmt.value.format(dari!),
+        fmt.value.format(sampai!),
+      );
     } else {
       refreshController.value.refreshCompleted();
       refreshController.value.loadComplete();
@@ -72,6 +75,7 @@ class MonitoringStockProductController extends GetxController {
     await load.then((value) {
       if (value != null) {
         var berhasil = value.success;
+        // ignore: non_constant_identifier_names
         var StockRom = value.monitoringStock;
         if (berhasil!) {
           if (StockRom != null) {
@@ -89,9 +93,11 @@ class MonitoringStockProductController extends GetxController {
         }
       }
     }).catchError((onError) {
-      print(
-        onError.toString(),
-      );
+      if (kDebugMode) {
+        print(
+          onError.toString(),
+        );
+      }
     }).whenComplete(() => isLoading.value = false);
   }
 }

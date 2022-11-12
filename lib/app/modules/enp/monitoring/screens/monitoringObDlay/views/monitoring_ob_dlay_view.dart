@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:face_id_plus/app/data/models/model_ob_delay.dart';
 import 'package:face_id_plus/app/data/utils/bg.dart';
 import 'package:flutter/material.dart';
@@ -9,36 +11,37 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../controllers/monitoring_ob_dlay_controller.dart';
 
 class MonitoringObDlayView extends GetView<MonitoringObDlayController> {
+  const MonitoringObDlayView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 32, 72, 142),
-          title: const Text('Delay OB'),
-          leading: InkWell(
-            borderRadius: BorderRadius.circular(40),
-            splashColor: const Color.fromARGB(255, 32, 72, 142),
-            child: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white,
-            ),
-            onTap: () {
-              Get.back();
-            },
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                bottomDialog(context);
+            backgroundColor: const Color.fromARGB(255, 32, 72, 142),
+            title: const Text('Delay OB'),
+            leading: InkWell(
+              borderRadius: BorderRadius.circular(40),
+              splashColor: const Color.fromARGB(255, 32, 72, 142),
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Get.back();
               },
-              icon: const Icon(Icons.date_range),
             ),
-          ]
-        ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  bottomDialog(context);
+                },
+                icon: const Icon(Icons.date_range),
+              ),
+            ]),
         body: Stack(
           children: <Widget>[
-            BackgroundM(),
+            const BackgroundM(),
             Column(
               children: [
                 // bagianTgl(context),
@@ -70,8 +73,9 @@ class MonitoringObDlayView extends GetView<MonitoringObDlayController> {
         backgroundColor: Color.fromARGB(255, 32, 72, 142),
       ),
       child: ListView(
-        children:
-            controller.dataObDelay.map((element) => contentDelay(element)).toList(),
+        children: controller.dataObDelay
+            .map((element) => contentDelay(element))
+            .toList(),
       ),
     );
   }
@@ -81,7 +85,7 @@ class MonitoringObDlayView extends GetView<MonitoringObDlayController> {
     String? tipe;
     if (obDelay.typeDelay != null) {
       tipe = "${obDelay.typeDelay}";
-    }else {
+    } else {
       tipe = null;
     }
     return SizedBox(
@@ -132,7 +136,6 @@ class MonitoringObDlayView extends GetView<MonitoringObDlayController> {
                       DataCell(Text("${obDelay.keterangan}")),
                     ],
                   ),
-                  
                 ],
               ),
             ],
@@ -224,7 +227,7 @@ class MonitoringObDlayView extends GetView<MonitoringObDlayController> {
 
   bottomDialog(context) {
     return showModalBottomSheet(
-        backgroundColor: Colors.transparent, 
+        backgroundColor: Colors.transparent,
         useRootNavigator: true,
         context: context,
         builder: (context) {
@@ -278,6 +281,7 @@ class MonitoringObDlayView extends GetView<MonitoringObDlayController> {
           );
         });
   }
+
   Future<DateTime?> _selectDate(BuildContext context, DateTime initDate) async {
     return await DatePicker.showDatePicker(context,
         showTitleActions: true,

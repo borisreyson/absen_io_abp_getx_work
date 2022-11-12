@@ -120,7 +120,7 @@ class UpdateHmKmAkhirView extends GetView<UpdateHmKmAkhirController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${controller.fmt.format(DateTime.parse(controller.data.value.p2hTglAwal!))} ${controller.data.value.p2hJamAwal}",
+                  "${controller.fmt.format(DateTime.parse("${controller.data.value.p2hTglAwal}"))} ${controller.data.value.p2hJamAwal}",
                   style: const TextStyle(fontSize: 12),
                 ),
                 Text(

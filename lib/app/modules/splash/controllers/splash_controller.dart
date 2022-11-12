@@ -1,8 +1,15 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:face_id_plus/app/modules/splash/provider/provider.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart' as handler;
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:dio/dio.dart';
 import '../../../data/utils/constants.dart';
 
 class SplashController extends GetxController
@@ -16,15 +23,15 @@ class SplashController extends GetxController
   final penyimpananStatus = false.obs;
   final lokasiStatus = false.obs;
   final galeryStatus = false.obs;
-  @override
-  void onInit() {
-    Future.delayed(
-        const Duration(
-          milliseconds: 2400,
-        ), () async {
-      await checkIntro();
-    });
+  var dio = Dio();
+  final progress = RxDouble(0.0);
+  final provider = SplashProvider();
+  late var camera;
+  final newPath = RxString("");
 
+  @override
+  void onInit() async {
+    await checkIntro();
     super.onInit();
   }
 
@@ -43,17 +50,36 @@ class SplashController extends GetxController
   }
 
   Future<bool> izinPenyimpanan() async {
-    var camera = handler.Permission.storage;
-    var status = await camera.status;
-    if (status == handler.PermissionStatus.granted) {
-      penyimpananStatus.value = true;
+    if (Platform.isAndroid) {
+      var osVersion = await DeviceInfoPlugin().androidInfo;
+      if (int.parse("${osVersion.version.release}") > 10) {
+        camera = await handler.Permission.storage.status;
+      } else {
+        camera = await handler.Permission.storage.status;
+      }
+      var status = camera;
+      if (status == handler.PermissionStatus.granted) {
+        penyimpananStatus.value = true;
+      }
+      if (status == handler.PermissionStatus.denied) {
+        penyimpananStatus.value = false;
+      } else if (status == handler.PermissionStatus.permanentlyDenied) {
+        penyimpananStatus.value = false;
+      }
+      return penyimpananStatus.value;
+    } else {
+      camera = await handler.Permission.storage.status;
+      var status = camera;
+      if (status == handler.PermissionStatus.granted) {
+        penyimpananStatus.value = true;
+      }
+      if (status == handler.PermissionStatus.denied) {
+        penyimpananStatus.value = false;
+      } else if (status == handler.PermissionStatus.permanentlyDenied) {
+        penyimpananStatus.value = false;
+      }
+      return penyimpananStatus.value;
     }
-    if (status == handler.PermissionStatus.denied) {
-      penyimpananStatus.value = false;
-    } else if (status == handler.PermissionStatus.permanentlyDenied) {
-      penyimpananStatus.value = false;
-    }
-    return penyimpananStatus.value;
   }
 
   Future<bool> izinLokasi() async {
@@ -71,8 +97,9 @@ class SplashController extends GetxController
   }
 
   Future<bool> izinGalery() async {
-    var camera = handler.Permission.mediaLibrary;
+    var camera = handler.Permission.photos;
     var status = await camera.status;
+    print("Galery ${status.isDenied}");
     if (status == handler.PermissionStatus.granted) {
       galeryStatus.value = true;
     }
@@ -89,35 +116,84 @@ class SplashController extends GetxController
     var intro = pref.getBool(Constants.intro);
     if (intro != null) {
       if (intro) {
-        Get.offAllNamed('/home');
+        await izinCamera();
+        if (Platform.isAndroid) {
+          await izinPenyimpanan();
+        }
+        await izinGalery();
+        await izinLokasi();
+        if (Platform.isAndroid) {
+          if (cameraStatus.value &&
+              penyimpananStatus.value &&
+              lokasiStatus.value) {
+            await cekFilePendukung();
+
+            Get.offAllNamed('/home');
+          } else {
+            Get.offAllNamed('/lokasi');
+          }
+        } else {
+          if (cameraStatus.value && lokasiStatus.value && galeryStatus.value) {
+            await cekFilePendukung();
+
+            Get.offAllNamed('/home');
+          } else {
+            Get.offAllNamed('/lokasi');
+          }
+        }
       } else {
         await izinCamera();
-        await izinPenyimpanan();
+        if (Platform.isAndroid) {
+          await izinPenyimpanan();
+        }
         await izinGalery();
         await izinLokasi();
 
-        if (cameraStatus.value &&
-            penyimpananStatus.value &&
-            lokasiStatus.value &&
-            galeryStatus.value) {
-          Get.offAllNamed('/home');
+        if (Platform.isAndroid) {
+          if (cameraStatus.value &&
+              penyimpananStatus.value &&
+              lokasiStatus.value) {
+            await cekFilePendukung();
+
+            Get.offAllNamed('/home');
+          } else {
+            Get.offAllNamed('/lokasi');
+          }
         } else {
-          Get.offAllNamed('/lokasi');
+          if (cameraStatus.value && lokasiStatus.value && galeryStatus.value) {
+            await cekFilePendukung();
+
+            Get.offAllNamed('/home');
+          } else {
+            Get.offAllNamed('/lokasi');
+          }
         }
       }
     } else {
       await izinCamera();
-      await izinPenyimpanan();
+      if (Platform.isAndroid) {
+        await izinPenyimpanan();
+      }
       await izinGalery();
       await izinLokasi();
+      if (Platform.isAndroid) {
+        if (cameraStatus.value &&
+            penyimpananStatus.value &&
+            lokasiStatus.value) {
+          await cekFilePendukung();
 
-      if (cameraStatus.value &&
-          penyimpananStatus.value &&
-          lokasiStatus.value &&
-          galeryStatus.value) {
-        Get.offAllNamed('/home');
+          Get.offAllNamed('/home');
+        } else {
+          Get.offAllNamed('/lokasi');
+        }
       } else {
-        Get.offAllNamed('/lokasi');
+        if (cameraStatus.value && lokasiStatus.value && galeryStatus.value) {
+          await cekFilePendukung();
+
+          Get.offAllNamed('/home');
+        } else {
+          Get.offAllNamed('/lokasi');
+        }
       }
     }
     print(
@@ -128,5 +204,146 @@ class SplashController extends GetxController
   void onClose() {
     _controller.dispose();
     super.onClose();
+  }
+
+  cekFilePendukung() async {
+    await provider.cekFilePendukung().then((value) async {
+      var res = value?.filePendukung;
+      if (res != null) {
+        var pref = await SharedPreferences.getInstance();
+        var waktuPertama = pref.getString(Constants.musik1Time);
+        var waktuKedua = pref.getString(Constants.musik2Time);
+        var musik1 = pref.getString(Constants.musik1);
+        var musik2 = pref.getString(Constants.musik2);
+        if (musik1 == null &&
+            musik2 == null &&
+            waktuPertama == null &&
+            waktuKedua == null) {
+          if (await downloadFile(1)) {
+            pref.setString(Constants.musik1, "${res[0].namaFile}");
+            pref.setString(Constants.musik1Time, "${res[0].updateFile}");
+            print("OK");
+          } else {
+            print("Not OK");
+          }
+          if (await downloadFile(2)) {
+            pref.setString(Constants.musik2, "${res[1].namaFile}");
+            pref.setString(Constants.musik2Time, "${res[1].updateFile}");
+            print("1OK");
+          } else {
+            print("1Not OK");
+          }
+        } else {
+          var dtUpdate = DateTime.parse("$waktuPertama");
+          var dtUpdate2 = DateTime.parse("$waktuKedua");
+          var waktuA = DateTime.parse("${res[0].updateFile}");
+          var waktub = DateTime.parse("${res[1].updateFile}");
+          if (waktuA.isAfter(dtUpdate)) {
+            if (await downloadFile(1)) {
+              pref.setString(
+                  Constants.musik1, "${newPath.value}/${res[0].namaFile}");
+              pref.setString(Constants.musik1Time, "${res[0].updateFile}");
+              print("2OK");
+            } else {
+              print("2Not OK");
+            }
+          }
+          if (waktub.isAfter(dtUpdate2)) {
+            if (await downloadFile(2)) {
+              pref.setString(
+                  Constants.musik2, "${newPath.value}/${res[1].namaFile}");
+              pref.setString(Constants.musik2Time, "${res[1].updateFile}");
+              print("3OK");
+            } else {
+              print("3Not OK");
+            }
+          }
+        }
+      }
+    });
+  }
+
+  Future<bool> _reqPermission(Permission permission) async {
+    if (await permission.isGranted) {
+      return true;
+    } else {
+      var result = await permission.request();
+      if (result == PermissionStatus.granted) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  Future<bool> downloadFile(index) async {
+    var namaFile = "musik${index}.mp3";
+    var url = "https://abpjobsite.com/musik${index}.mp3";
+    print("namaFile $namaFile");
+    Directory? directory;
+    try {
+      if (Platform.isAndroid) {
+        var osVersion = await DeviceInfoPlugin().androidInfo;
+        if (int.parse("${osVersion.version.release}") > 10) {
+          if (await _reqPermission(Permission.storage)) {
+            directory = await getExternalStorageDirectory();
+            print(directory?.path);
+
+            newPath.value = "${directory?.path}/AbpEnergy/Musik";
+            directory = Directory(newPath.value);
+          } else {
+            print("error1");
+            return false;
+          }
+        } else {
+          if (await _reqPermission(Permission.storage)) {
+            directory = await getExternalStorageDirectory();
+            print(directory?.path);
+            List<String>? folders = directory?.path.split("/");
+            for (int x = 1; x < folders!.length; x++) {
+              String folder = folders[x];
+              if (folder != "Android") {
+                newPath.value += "/$folder";
+              } else {
+                break;
+              }
+            }
+            newPath.value = "${newPath.value}/AbpEnergy/Musik";
+            directory = Directory(newPath.value);
+          } else {
+            print("error3");
+            return false;
+          }
+        }
+      } else {
+        directory = await getTemporaryDirectory();
+      }
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+      if (await directory.exists()) {
+        File saveFile = File("${directory.path}/$namaFile");
+
+        if (await saveFile.exists()) {
+          await saveFile.delete();
+        }
+        await dio.download(url, saveFile.path,
+            options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
+            onReceiveProgress: (downloaded, totalSize) {
+          progress.value = (downloaded / totalSize) * 100;
+          print("loading ${progress.value}");
+        });
+        if (Platform.isIOS) {
+          await ImageGallerySaver.saveFile(saveFile.path,
+              isReturnPathOfIOS: true);
+        }
+        return true;
+      }
+    } catch (e) {
+      print("Error $e");
+    }
+    print("error2");
+
+    return false;
   }
 }

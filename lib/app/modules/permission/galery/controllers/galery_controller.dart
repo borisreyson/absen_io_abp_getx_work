@@ -7,8 +7,9 @@ import '../../../../data/utils/constants.dart';
 class GaleryController extends GetxController {
   final galeryStatus = false.obs;
   @override
-  void onInit() {
-    statusIzin();
+  void onInit() async {
+    await statusIzin();
+    print("Galery ${galeryStatus.value}");
     super.onInit();
   }
 
@@ -45,6 +46,6 @@ class GaleryController extends GetxController {
   saveIntro() async {
     var pref = await SharedPreferences.getInstance();
     await pref.setBool(Constants.intro, true);
-    Get.offAllNamed(Routes.HOME);
+    Get.offAllNamed(Routes.SPLASH);
   }
 }

@@ -10,41 +10,57 @@ import '../providers/buletin_provider.dart';
 class HomeController extends GetxController {
   final _provider = BuletinProvider();
   final indexSelect = 0.obs;
-  Rx<Buletin>? buletin = Buletin().obs;
   final page = 1.obs;
   late RefreshController pullRefresh;
   final versiAplikasi = RxnString(null);
+  final dataBuletin = <Data>[].obs;
+  final loaded = false.obs;
+  final lastPage = 1.obs;
+  final pullUp = false.obs;
+
   @override
   void onInit() async {
     pullRefresh = RefreshController(initialRefresh: false);
-    await _provider.getBuletinPage(1).then((value) {
-      buletin?.value = value!;
-    });
+    dataBuletin.clear();
+    page.value = 1;
+    getBuletin(page.value);
     // getVersionCode();
     super.onInit();
   }
 
   void onLoading() async {
-    page.value++;
-    await _provider
-        .getBuletinPage(int.parse("$page"))
-        .then((value) => buletin?.value = value!);
-    pullRefresh.loadComplete();
-    pullRefresh.refreshCompleted();
+    if (lastPage.value > page.value) {
+      pullUp.value = true;
+      page.value++;
+      getBuletin(page.value);
+    } else {
+      pullUp.value = false;
+    }
   }
 
   void onRefresh() async {
+    dataBuletin.clear();
     page.value = 1;
-    await _provider
-        .getBuletinPage(int.parse("$page"))
-        .then((value) => buletin?.value = value!);
-    pullRefresh.loadComplete();
-    pullRefresh.refreshCompleted();
+    getBuletin(page.value);
   }
 
-  internetPermission() async {
-    // var permission = handler.Permission.
+  getBuletin(hal) async {
+    await _provider.getBuletinPage(hal).then((value) {
+      var res = value.data;
+      var endPage = value.lastPage;
+      if (endPage != null) {
+        lastPage.value = endPage;
+      }
+      if (res != null) {
+        for (var e in res) {
+          dataBuletin.add(e);
+        }
+        pullRefresh.loadComplete();
+        pullRefresh.refreshCompleted();
+      }
+    }).whenComplete(() => loaded.value = true);
   }
+
   getVersionCode() async {
     var pref = await SharedPreferences.getInstance();
     versiAplikasi.value = pref.getString(Constants.versiAplikasi);

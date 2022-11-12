@@ -1,3 +1,4 @@
+import 'package:face_id_plus/app/data/models/check_p2h.dart';
 import 'package:face_id_plus/app/data/models/detail_sarana_model.dart';
 import 'package:face_id_plus/app/data/models/karyawan_model.dart';
 import 'package:face_id_plus/app/data/models/listSaranaHeader.dart';
@@ -28,6 +29,14 @@ class SaranaProvider {
     var api = await http.get(uri);
     var jsonRes = json.decode(api.body);
     return KaryawanModel.fromJson(jsonRes);
+  }
+
+  Future<CheckP2HModels> checkP2h(p2hId) async {
+    var uri = Uri.parse(
+        "https://lp.abpjobsite.com/api/v1/p2h/check/data/p2h?p2hId=$p2hId");
+    var api = await http.get(uri);
+    var jsonRes = json.decode(api.body);
+    return CheckP2HModels.fromJson(jsonRes);
   }
 
   Future<ResultSarana> rubahSarana(UpdateSarana body) async {

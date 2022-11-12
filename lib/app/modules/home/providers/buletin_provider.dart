@@ -21,7 +21,7 @@ class BuletinProvider extends GetConnect {
     return response.body;
   }
 
-  Future<Buletin?> getBuletinPage(int page) async {
+  Future<Buletin> getBuletinPage(int page) async {
     var api = await http.get(
         Uri.parse("https://lp.abpjobsite.com/api/v1/message/info?page=$page"));
     var jsonObject = json.decode(api.body);

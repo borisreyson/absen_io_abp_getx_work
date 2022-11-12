@@ -171,6 +171,8 @@ abstract class Routes {
   static const MASTER_ADMIN = _Paths.MASTER_ADMIN;
   static const SIGNATURE_VIEW = _Paths.SIGNATURE_VIEW;
   static const SIGNATURE_CREATE = _Paths.SIGNATURE_CREATE;
+  static const DAFTAR_P2H_HARIAN = _Paths.P2H + _Paths.DAFTAR_P2H_HARIAN;
+  static const MENU_FORM_P2H = _Paths.P2H + _Paths.MENU_FORM_P2H;
 }
 
 abstract class _Paths {
@@ -335,4 +337,7 @@ abstract class _Paths {
   static const SIGNATURE = '/signature';
   static const SIGNATURE_VIEW = '/signature-view';
   static const SIGNATURE_CREATE = '/signature-create';
+  static const LOGIN_ABSENSI = '/login-absensi';
+  static const DAFTAR_P2H_HARIAN = '/daftar-p2h-harian';
+  static const MENU_FORM_P2H = '/menu-form-p2h';
 }

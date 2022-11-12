@@ -14,51 +14,16 @@ class DaftarPemeriksaanP2HView extends GetView<DaftarPemeriksaanP2HController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        floatingActionButton: floatingAction(),
         appBar: AppBar(
           title: const Text('Daftar Pemeriksaan Sarana'),
           centerTitle: true,
         ),
         body: (controller.loaded.value)
-            ? Stack(
+            ? ListView(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: ListView(
-                      children: [
-                        unCheckedColumn(),
-                        checkedColumn(),
-                      ],
-                    ),
-                  ),
-                  if (controller.menuOpen.value)
-                    Positioned(
-                      bottom: controller.posisi.value,
-                      left: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () async {
-                          controller.menuOpen.value = false;
-                          await controller.serviceKondisi
-                              .getByHeader(
-                                  idHeader: "${controller.idHeader.value}")
-                              .then((value) async {
-                            var jumlah = value.length;
-                            await showDialog(jumlah);
-
-                            print("jumlah $jumlah");
-                          });
-                          controller.menuOpen.value = true;
-                        },
-                        child: ScaleTransition(
-                          scale: controller.animateController,
-                          child: const Icon(
-                            Icons.keyboard_double_arrow_up_rounded,
-                            size: 80,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ),
+                  unCheckedColumn(),
+                  checkedColumn(),
                 ],
               )
             : const Center(
@@ -337,6 +302,22 @@ class DaftarPemeriksaanP2HView extends GetView<DaftarPemeriksaanP2HController> {
           ),
         ],
       ),
+    );
+  }
+
+  FloatingActionButton floatingAction() {
+    return FloatingActionButton.extended(
+      onPressed: () async {
+        controller.menuOpen.value = false;
+        await controller.serviceKondisi
+            .getByHeader(idHeader: "${controller.idHeader.value}")
+            .then((value) async {
+          var jumlah = value.length;
+          await showDialog(jumlah);
+        });
+        controller.menuOpen.value = true;
+      },
+      label: const Text("Lanjut"),
     );
   }
 }

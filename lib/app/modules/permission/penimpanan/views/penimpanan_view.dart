@@ -39,7 +39,7 @@ class PenimpananView extends GetView<PenimpananController> {
                   const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text(
-                      "Kami Membutuhkan Penyimpanan Anda untuk melakukan penyimpanan file pengguna, sebagai penyimpanan sementara, jadi Izin untuk penggunaan penyimpanan sangat di perlukan",
+                      "Kami Membutuhkan Penyimpanan Anda untuk melakukan penyimpanan file pendukung untuk aplikasi ini, sebagai penyimpanan kebutuhan aplikasi, jadi Izin untuk penggunaan penyimpanan sangat di perlukan",
                       textAlign: TextAlign.justify,
                       style: TextStyle(color: Color(0xFF732002)),
                     ),
@@ -51,7 +51,8 @@ class PenimpananView extends GetView<PenimpananController> {
                       ? ElevatedButton.icon(
                           label: const Text("Meminta Izin Penyimpanan"),
                           style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 189, 11, 165)),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 189, 11, 165)),
                           onPressed: () {
                             controller.getPermission();
                           },
@@ -59,7 +60,8 @@ class PenimpananView extends GetView<PenimpananController> {
                       : ElevatedButton.icon(
                           label: const Text("Selanjutnya"),
                           style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 189, 11, 165)),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 189, 11, 165)),
                           onPressed: () {
                             // Get.offAllNamed(Routes.HOME);
                             controller.saveIntro(context);

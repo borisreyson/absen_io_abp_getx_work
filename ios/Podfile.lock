@@ -1,6 +1,4 @@
 PODS:
-  - alarmplayer (0.0.1):
-    - Flutter
   - assets_audio_player (0.0.1):
     - Flutter
   - assets_audio_player_web (0.0.1):
@@ -167,7 +165,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - alarmplayer (from `.symlinks/plugins/alarmplayer/ios`)
   - assets_audio_player (from `.symlinks/plugins/assets_audio_player/ios`)
   - assets_audio_player_web (from `.symlinks/plugins/assets_audio_player_web/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
@@ -223,8 +220,6 @@ SPEC REPOS:
     - Reachability
 
 EXTERNAL SOURCES:
-  alarmplayer:
-    :path: ".symlinks/plugins/alarmplayer/ios"
   assets_audio_player:
     :path: ".symlinks/plugins/assets_audio_player/ios"
   assets_audio_player_web:
@@ -283,7 +278,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  alarmplayer: 2750e721893f8fe860e48f3f1f86100d09aa3645
   assets_audio_player: edee322b9cb625571b830b35872ead1a295fd917
   assets_audio_player_web: 19826380c44375761aa0b9053665c1e3fbc3b86b
   camera_avfoundation: 07c77549ea54ad95d8581be86617c094a46280d9

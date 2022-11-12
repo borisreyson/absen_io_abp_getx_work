@@ -1,4 +1,7 @@
+// ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
+
 import 'package:face_id_plus/app/data/models/model_stock.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -43,10 +46,10 @@ class MonitoringStockRomController extends GetxController {
     if (page.value < totalPage.value) {
       page.value++;
       fetchStockRom(
-      page.value,
-      fmt.value.format(dari!),
-      fmt.value.format(sampai!),
-    );
+        page.value,
+        fmt.value.format(dari!),
+        fmt.value.format(sampai!),
+      );
     } else {
       refreshController.value.refreshCompleted();
       refreshController.value.loadComplete();
@@ -89,9 +92,11 @@ class MonitoringStockRomController extends GetxController {
         }
       }
     }).catchError((onError) {
-      print(
-        onError.toString(),
-      );
+      if (kDebugMode) {
+        print(
+          onError.toString(),
+        );
+      }
     }).whenComplete(() => isLoading.value = false);
   }
 }

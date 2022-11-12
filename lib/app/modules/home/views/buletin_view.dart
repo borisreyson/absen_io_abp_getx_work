@@ -11,22 +11,21 @@ class BuletinView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => (controller.buletin != null)
+    return Obx(() => (controller.loaded.value)
         ? SmartRefresher(
             enablePullDown: true,
             header: const WaterDropMaterialHeader(),
             onLoading: controller.onLoading,
             controller: controller.pullRefresh,
             onRefresh: controller.onRefresh,
-            child: (controller.buletin!.value.data != null)
-                ? ListView(
-                    children: controller.buletin!.value.data!
-                        .map((e) => _content(e))
-                        .toList(),
-                  )
-                : Container(),
+            enablePullUp: controller.pullUp.value,
+            child: ListView(
+              children: controller.dataBuletin.map((e) => _content(e)).toList(),
+            ),
           )
-        : Container());
+        : const Center(
+            child: CircularProgressIndicator(color: Colors.black),
+          ));
   }
 
   Widget _content(Data list) {

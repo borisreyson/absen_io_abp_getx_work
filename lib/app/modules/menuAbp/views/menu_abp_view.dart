@@ -4,9 +4,7 @@ import 'package:face_id_plus/app/modules/menuAbp/views/loading_abp_view.dart';
 import 'package:face_id_plus/app/routes/app_pages.dart';
 import 'package:face_id_plus/app/views/views/navigasi_view.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/menu_abp_controller.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -16,10 +14,9 @@ class MenuAbpView extends GetView<MenuAbpController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => (controller.isLoading.value)
-          ? const LoadingAbpView()
-          : Scaffold(
-              appBar: AppBar(
+      () => Scaffold(
+        appBar: (!controller.isLoading.value)
+            ? AppBar(
                 elevation: 0,
                 centerTitle: true,
                 title: const Text(
@@ -42,10 +39,13 @@ class MenuAbpView extends GetView<MenuAbpController> {
                         color: Colors.white,
                       ))
                 ],
-              ),
-              backgroundColor: Colors.white,
-              bottomNavigationBar: NavigasiView(navigasiTap: navigasiTap),
-              body: Padding(
+              )
+            : null,
+        backgroundColor: Colors.white,
+        bottomNavigationBar: NavigasiView(navigasiTap: navigasiTap),
+        body: (controller.isLoading.value)
+            ? const LoadingAbpView()
+            : Padding(
                 padding: const EdgeInsets.all(10),
                 child: DynamicHeightGridView(
                   mainAxisSpacing: 10,
@@ -57,7 +57,7 @@ class MenuAbpView extends GetView<MenuAbpController> {
                   },
                 ),
               ),
-            ),
+      ),
     );
   }
 }

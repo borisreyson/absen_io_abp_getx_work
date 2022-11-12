@@ -1,4 +1,5 @@
 import 'package:face_id_plus/app/data/models/cek_login_model.dart';
+import 'package:face_id_plus/app/data/models/login_model.dart' as modelLogin;
 import 'package:face_id_plus/app/data/providers/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,9 @@ class LoginAbsenController extends GetxController {
   Rx<bool> passwordVisible = false.obs;
   FaceModel? faceModel;
   RoundedLoadingButtonController roundBtn = RoundedLoadingButtonController();
+  final animateBtn = false.obs;
   final akunDitemukan = false.obs;
+  final denganAbp = true.obs;
   final userData = User().obs;
   @override
   void onInit() {
@@ -27,14 +30,14 @@ class LoginAbsenController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onClose() {}
-  doLogin(loginAbp) async {
+  doLogin() async {
     if (formKey.currentState!.validate()) {
+      var loginAbp = modelLogin.LoginABP();
+      loginAbp.username = userController.text;
+      loginAbp.password = passController.text;
       apiLogin(loginAbp);
     } else {
       roundBtn.error();
-
       Future.delayed(const Duration(milliseconds: 600), () {
         Get.snackbar(
             "Error Login", "Username/Nik Atau Password Tidak Boleh Kosong!!");
@@ -44,8 +47,16 @@ class LoginAbsenController extends GetxController {
     }
   }
 
-  apiLogin(loginAbp) async {
+  doLoginABP() async {
+    denganAbp.value = false;
     roundBtn.start();
+    var loginAbp = modelLogin.LoginABP();
+    loginAbp.username = userData.value.nik;
+    loginAbp.password = '12345';
+    apiLogin(loginAbp);
+  }
+
+  apiLogin(loginAbp) async {
     await _provider.loginApiFace(loginAbp).then((result) async {
       faceModel = result;
       if (faceModel != null) {
@@ -56,6 +67,7 @@ class LoginAbsenController extends GetxController {
             roundBtn.error();
             userController.clear();
             passController.clear();
+            denganAbp.value = true;
             Future.delayed(const Duration(milliseconds: 1000), () {
               roundBtn.reset();
             });

@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:face_id_plus/app/data/utils/bg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -5,8 +7,9 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../../../data/models/model_ob.dart';
 import '../controllers/monitoring_o_b_controller.dart';
-
 class MonitoringOBView extends GetView<MonitoringOBController> {
+  const MonitoringOBView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -36,7 +39,7 @@ class MonitoringOBView extends GetView<MonitoringOBController> {
         ),
         body: Stack(
           children: <Widget>[
-            BackgroundM(),
+            const BackgroundM(),
             Column(
               children: [
                 // bagianTgl(context),
@@ -400,7 +403,7 @@ class MonitoringOBView extends GetView<MonitoringOBController> {
 
   bottomDialog(context) {
     return showModalBottomSheet(
-        backgroundColor: Colors.transparent, 
+        backgroundColor: Colors.transparent,
         useRootNavigator: true,
         context: context,
         builder: (context) {

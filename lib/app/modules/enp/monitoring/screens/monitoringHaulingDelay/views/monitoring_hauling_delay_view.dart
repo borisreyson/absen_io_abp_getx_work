@@ -6,14 +6,16 @@ import '../controllers/monitoring_hauling_delay_controller.dart';
 
 class MonitoringHaulingDelayView
     extends GetView<MonitoringHaulingDelayController> {
+  const MonitoringHaulingDelayView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MonitoringHaulingDelayView'),
+        title: const Text('MonitoringHaulingDelayView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'MonitoringHaulingDelayView is working',
           style: TextStyle(fontSize: 20),

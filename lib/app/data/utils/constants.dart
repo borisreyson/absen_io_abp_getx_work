@@ -55,8 +55,14 @@ class Constants {
   static const String flagAbsen = "flagAbsen";
   static const String showAbsen = "showAbsen";
   static const String perusahaanAbsen = "perusahaanAbsen";
+  static const String fotoProfileAbsen = "fotoProfileAbsen";
 
   static const String versiAplikasi = "versiAplikasi";
+
+  static const String musik1 = "musik1";
+  static const String musik2 = "musik2";
+  static const String musik2Time = "musik2Time";
+  static const String musik1Time = "musik2Time";
 
   // ignore: non_constant_identifier_names
   sign_out(context) async {

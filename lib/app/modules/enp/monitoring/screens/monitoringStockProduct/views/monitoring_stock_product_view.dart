@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:face_id_plus/app/data/models/model_stock.dart';
 import 'package:face_id_plus/app/data/utils/bg.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ import '../controllers/monitoring_stock_product_controller.dart';
 
 class MonitoringStockProductView
     extends GetView<MonitoringStockProductController> {
+  const MonitoringStockProductView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -39,7 +43,7 @@ class MonitoringStockProductView
         ),
         body: Stack(
           children: <Widget>[
-            BackgroundM(),
+            const BackgroundM(),
             Column(
               children: [
                 // bagianTgl(context),
@@ -75,8 +79,9 @@ class MonitoringStockProductView
         mainAxisSpacing: 5,
         crossAxisCount: 2,
         childAspectRatio: (1 / 0.8),
-        children:
-            controller.dataStockRom.map((element) => contentStock(element)).toList(),
+        children: controller.dataStockRom
+            .map((element) => contentStock(element))
+            .toList(),
       ),
     );
   }
@@ -234,9 +239,9 @@ class MonitoringStockProductView
     );
   }
 
-  Widget _tglPick(String __title, _initial) {
-    var ___inital = _initial;
-    TextStyle _style =
+  Widget _tglPick(String _title, initial) {
+    var __inital = initial;
+    TextStyle style =
         const TextStyle(fontWeight: FontWeight.bold, color: Colors.white);
     return StatefulBuilder(
       builder: (context, stateSet) {
@@ -245,17 +250,17 @@ class MonitoringStockProductView
           elevation: 10,
           child: InkWell(
               onTap: () async {
-                var selected = await _selectDate(context, ___inital!);
+                var selected = await _selectDate(context, __inital!);
                 if (selected != null) {
-                  if (__title == "Dari") {
+                  if (_title == "Dari") {
                     stateSet(() {
                       controller.dari = selected;
-                      ___inital = selected;
+                      __inital = selected;
                     });
-                  } else if (__title == "Sampai") {
+                  } else if (_title == "Sampai") {
                     stateSet(() {
                       controller.sampai = selected;
-                      ___inital = selected;
+                      __inital = selected;
                     });
                   }
                 }
@@ -266,14 +271,13 @@ class MonitoringStockProductView
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      __title,
-                      style: _style,
+                      _title,
+                      style: style,
                     ),
                     const SizedBox(
                       width: 20,
                     ),
-                    Text(controller.fmt.value.format(___inital!),
-                        style: _style),
+                    Text(controller.fmt.value.format(__inital!), style: style),
                   ],
                 ),
               )),
@@ -283,7 +287,7 @@ class MonitoringStockProductView
   }
 
   Widget _submitWidgetDTrange(context) {
-    TextStyle _style =
+    TextStyle style =
         const TextStyle(fontWeight: FontWeight.bold, color: Colors.white);
     return Card(
       color: Colors.blue,
@@ -306,7 +310,7 @@ class MonitoringStockProductView
               children: [
                 Text(
                   "Submit",
-                  style: _style,
+                  style: style,
                 ),
               ],
             ),
@@ -316,7 +320,7 @@ class MonitoringStockProductView
 
   bottomDialog(context) {
     return showModalBottomSheet(
-        backgroundColor: Colors.transparent, 
+        backgroundColor: Colors.transparent,
         useRootNavigator: true,
         context: context,
         builder: (context) {

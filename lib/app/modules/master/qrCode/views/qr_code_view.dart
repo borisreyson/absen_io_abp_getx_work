@@ -47,9 +47,9 @@ class QrCodeView extends GetView<QrCodeController> {
                   : Icons.play_arrow_rounded),
             )
           ],
-          backgroundColor: const Color(0xFF732937),
+          backgroundColor: Colors.black,
         ),
-        backgroundColor: const Color(0xFF732937),
+        backgroundColor: Colors.black,
         body: (controller.isStarted.value)
             ? qrCodeWidget(context)
             : Center(
@@ -92,7 +92,7 @@ class QrCodeView extends GetView<QrCodeController> {
                 if (saranaId.contains("p2h")) {
                   controller.scanner?.stop();
                   controller.isStarted.value = false;
-                  await Get.toNamed(Routes.FROM_P2_H,
+                  await Get.toNamed(Routes.MENU_FORM_P2H,
                       arguments: {"saranaId": saranaId});
                   controller.scanner = MobileScannerController();
                   controller.scanner?.start();
@@ -177,6 +177,14 @@ class QrCodeView extends GetView<QrCodeController> {
             ),
           ),
         ),
+        Center(
+            child: SizedBox(
+          width: Get.width / 1.3,
+          child: const LinearProgressIndicator(
+            color: Colors.blue,
+            minHeight: 1.5,
+          ),
+        ))
       ],
     );
   }

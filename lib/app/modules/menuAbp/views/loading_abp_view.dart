@@ -7,26 +7,28 @@ class LoadingAbpView extends GetView<MenuAbpController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: ScaleTransition(
-        scale: controller.animationRun,
-        child: Card(
-          elevation: 50,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Image.asset(
-                "assets/images/abp_60x60.png",
-                fit: BoxFit.fill,
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: ScaleTransition(
+          scale: controller.animationRun,
+          child: Card(
+            elevation: 50,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset(
+                  "assets/images/abp_60x60.png",
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

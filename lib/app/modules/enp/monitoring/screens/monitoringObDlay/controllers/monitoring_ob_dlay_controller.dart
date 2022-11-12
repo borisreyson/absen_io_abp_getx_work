@@ -69,23 +69,21 @@ class MonitoringObDlayController extends GetxController {
   fetchObDelay(int pages, String dari, String sampai) async {
     var load = provider.getObDelay(pages, dari, sampai);
     await load.then((value) {
-      if (value != null) {
-        var berhasil = value.success;
-        var ob = value.monitoringObDelay;
-        if (berhasil!) {
-          if (ob != null) {
-            totalPage.value = ob.lastPage!;
-            if (page.value == totalPage.value) {
-              pullUp.value = false;
-            } else {
-              pullUp.value = true;
-            }
-            var apiData = ob.data;
-            dataObDelay.addAll(apiData!);
+      var berhasil = value.success;
+      var ob = value.monitoringObDelay;
+      if (berhasil!) {
+        if (ob != null) {
+          totalPage.value = ob.lastPage!;
+          if (page.value == totalPage.value) {
+            pullUp.value = false;
+          } else {
+            pullUp.value = true;
           }
-          refreshController.value.loadComplete();
-          refreshController.value.refreshCompleted();
+          var apiData = ob.data;
+          dataObDelay.addAll(apiData!);
         }
+        refreshController.value.loadComplete();
+        refreshController.value.refreshCompleted();
       }
     }).catchError((onError) {
       if (kDebugMode) {

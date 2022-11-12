@@ -33,7 +33,7 @@ class ListP2hSarprasView extends GetView<ListP2hSarprasController> {
                 ? ListView(
                     children:
                         controller.dataP2h.map((e) => cardP2H(e)).toList())
-                : Center(child: const Text("Data Belum Ada"))
+                : const Center(child: Text("Data Belum Ada"))
             : const Center(
                 child: CircularProgressIndicator(color: Colors.black),
               ),

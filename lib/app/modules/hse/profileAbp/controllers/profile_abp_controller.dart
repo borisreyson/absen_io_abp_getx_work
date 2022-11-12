@@ -1,4 +1,5 @@
 import 'package:face_id_plus/app/data/utils/constants.dart';
+import 'package:face_id_plus/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,11 +36,21 @@ class ProfileAbpController extends GetxController {
   }
 
   cekUsername(username) async {
-    await provider.cekUsernameDetail(username).then((value) {
+    await provider.cekUsernameDetail(username).then((value) async {
       if (value != null) {
         var res = value.dataLogin;
         if (res != null) {
           dataLogin.value = res;
+          if (foto.value == null) {
+            var pref = await SharedPreferences.getInstance();
+            if (dataLogin.value.photoProfile != null) {
+              pref.setString(
+                  Constants.fotoProfile, "${dataLogin.value.photoProfile}");
+              getPref();
+            } else {
+              await Get.toNamed(Routes.GANTI_FOTO);
+            }
+          }
         }
       }
     });
