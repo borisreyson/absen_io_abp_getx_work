@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'package:face_id_plus/app/data/providers/last_absen_provider.dart';
 import 'package:face_id_plus/app/data/providers/provider.dart';
 import 'package:face_id_plus/app/routes/app_pages.dart';

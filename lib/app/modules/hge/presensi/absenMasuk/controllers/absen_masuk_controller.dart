@@ -42,6 +42,7 @@ class AbsenMasukController extends GetxController {
   final gagal = false.obs;
   final cameraIsReady = false.obs;
   final statusKamera = false.obs;
+  final judulHalaman = RxnString(null);
   @override
   void onInit() async {
     await statusIzin();
@@ -51,6 +52,8 @@ class AbsenMasukController extends GetxController {
       var data = await Get.arguments;
       serverJam.value = data['jam'];
       lokasi = data['lokasi'];
+      judulHalaman.value = data['judulHalaman'];
+
       jamS = int.parse("${serverJam.value.jam}");
       menitS = int.parse("${serverJam.value.menit}");
       detikS = int.parse("${serverJam.value.detik}");

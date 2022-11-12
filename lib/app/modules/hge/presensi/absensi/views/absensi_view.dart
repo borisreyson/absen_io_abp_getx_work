@@ -27,7 +27,6 @@ class AbsensiView extends GetView<AbsensiController> {
                 leading: IconButton(
                   onPressed: () {
                     controller.closeStream();
-
                     Get.back(result: false);
                   },
                   icon: const Icon(
@@ -41,13 +40,13 @@ class AbsensiView extends GetView<AbsensiController> {
                   IconButton(
                       onPressed: () async {
                         controller.closeStream();
-
                         var res = await Get.toNamed(Routes.PROFILE);
                         if (res != null) {
                           if (res) {
                             await controller.closeStream();
-
                             Get.offAllNamed('/login-absen');
+                          } else {
+                            print("res $res");
                           }
                         } else {
                           controller.streamLokasi();
@@ -144,14 +143,16 @@ class AbsensiView extends GetView<AbsensiController> {
                       padding: const EdgeInsets.all(5.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 11, 143, 22)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 11, 143, 22)),
                         onPressed: (controller.absenTerakhir.value == "Masuk")
                             ? () async {
                                 await controller.closeStream();
                                 await Get.toNamed(Routes.ABSEN_MASUK,
                                     arguments: {
                                       "jam": controller.serverJam.value,
-                                      "lokasi": controller.myLocation
+                                      "lokasi": controller.myLocation,
+                                      "judulHalaman": "Absen Masuk"
                                     });
                                 controller.getPref();
                                 controller.streamLokasi();
@@ -166,7 +167,8 @@ class AbsensiView extends GetView<AbsensiController> {
                       padding: const EdgeInsets.all(5.0),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 190, 36, 25)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 190, 36, 25)),
                         onPressed: (controller.absenTerakhir.value == "Pulang")
                             ? () async {
                                 await controller.closeStream();
@@ -174,7 +176,8 @@ class AbsensiView extends GetView<AbsensiController> {
                                 await Get.toNamed(Routes.ABSEN_MASUK,
                                     arguments: {
                                       "jam": controller.serverJam.value,
-                                      "lokasi": controller.myLocation
+                                      "lokasi": controller.myLocation,
+                                      "judulHalaman": "Absen Pulang"
                                     });
                                 controller.getPref();
                                 controller.streamLokasi();

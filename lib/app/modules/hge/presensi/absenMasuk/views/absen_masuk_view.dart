@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import '../controllers/absen_masuk_controller.dart';
 
 class AbsenMasukView extends GetView<AbsenMasukController> {
@@ -12,18 +10,26 @@ class AbsenMasukView extends GetView<AbsenMasukController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => (controller.statusKamera.value)
-          ? Scaffold(
-              backgroundColor: Colors.transparent,
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                title: const Text('Absen Masuk'),
-                centerTitle: true,
-              ),
-              body: cameraWidget(context),
-            )
+      () => (controller.judulHalaman.value != null)
+          ? (controller.statusKamera.value)
+              ? Scaffold(
+                  backgroundColor: Colors.transparent,
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerFloat,
+                  appBar: AppBar(
+                    backgroundColor: Colors.transparent,
+                    title: Text("${controller.judulHalaman.value}"),
+                    centerTitle: true,
+                  ),
+                  body: cameraWidget(context),
+                )
+              : const Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                  ),
+                )
           : const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(
@@ -44,19 +50,20 @@ class AbsenMasukView extends GetView<AbsenMasukController> {
                         ? imagePreview()
                         : cameraPreview(context)
                     : const Center(
-                        child: CupertinoActivityIndicator(
-                          radius: 40,
+                        child: CircularProgressIndicator(
                           color: Colors.white,
                         ),
                       ),
               )
-            : const Positioned(
-                bottom: 0,
-                top: 0,
-                right: 0,
-                left: 0,
-                child:
-                    CupertinoActivityIndicator(radius: 40, color: Colors.white),
+            : Container(
+                width: Get.width,
+                height: Get.height,
+                color: Colors.black,
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
               ),
         Align(
           alignment: Alignment.topCenter,
@@ -122,8 +129,7 @@ class AbsenMasukView extends GetView<AbsenMasukController> {
           child: (controller.cameraController != null)
               ? (controller.isBusy.value)
                   ? const Center(
-                      child: CupertinoActivityIndicator(
-                        radius: 40,
+                      child: CircularProgressIndicator(
                         color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     )
