@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":device_info:unitTest" external.linked.project.path="$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":device_info:unitTest" external.linked.project.path="$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
@@ -12,8 +12,8 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/main/res;file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/debug/res;file://$MODULE_DIR$/../../../../build/device_info/generated/res/rs/debug;file://$MODULE_DIR$/../../../../build/device_info/generated/res/resValues/debug" />
-        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/androidTest/res;file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/androidTestDebug/res;file://$MODULE_DIR$/../../../../build/device_info/generated/res/rs/androidTest/debug;file://$MODULE_DIR$/../../../../build/device_info/generated/res/resValues/androidTest/debug" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/main/res;file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/debug/res;file://$MODULE_DIR$/../../../../build/device_info/generated/res/rs/debug;file://$MODULE_DIR$/../../../../build/device_info/generated/res/resValues/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/androidTest/res;file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/androidTestDebug/res;file://$MODULE_DIR$/../../../../build/device_info/generated/res/rs/androidTest/debug;file://$MODULE_DIR$/../../../../build/device_info/generated/res/resValues/androidTest/debug" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
         <option name="PROJECT_TYPE" value="1" />
       </configuration>
@@ -21,13 +21,13 @@
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/test" />
+    <content url="file://$USER_HOME$/Development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/testDebug" />
     <content url="file://$MODULE_DIR$/../../../../build/device_info/generated/ap_generated_sources/debugUnitTest/out" />
-    <content url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/test" />
-    <content url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.3/android/src/testDebug" />
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="android.device_info.main" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-6ba2af10bb05c88a2731482cedf2cfd11cf5af0b" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-a4ff2c53d84ca78702bc3be6c7ef0788ffca01d3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common:2.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.2.0" level="project" />
