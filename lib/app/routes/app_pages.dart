@@ -28,6 +28,8 @@ import '../modules/enp/monitoring/screens/monitoringTugboat/views/monitoring_tug
 import '../modules/enp/monitoring/views/monitoring_view.dart';
 import '../modules/hge/cuti/TiketPesawatCuti/bindings/tiket_pesawat_cuti_binding.dart';
 import '../modules/hge/cuti/TiketPesawatCuti/views/tiket_pesawat_cuti_view.dart';
+import '../modules/hge/cuti/atasanCuti/bindings/atasan_cuti_binding.dart';
+import '../modules/hge/cuti/atasanCuti/views/atasan_cuti_view.dart';
 import '../modules/hge/cuti/cutiKeAtasan/bindings/cuti_ke_atasan_binding.dart';
 import '../modules/hge/cuti/cutiKeAtasan/views/cuti_ke_atasan_view.dart';
 import '../modules/hge/cuti/cutiKeDeptHead/bindings/cuti_ke_dept_head_binding.dart';
@@ -868,11 +870,6 @@ class AppPages {
       binding: RubahDataBinding(),
     ),
     GetPage(
-      name: _Paths.LIST_KARYAWAN,
-      page: () => const ListKaryawanView(),
-      binding: ListKaryawanBinding(),
-    ),
-    GetPage(
       name: _Paths.SCAN_Q_R,
       page: () => const ScanQRView(),
       binding: ScanQRBinding(),
@@ -1105,6 +1102,16 @@ class AppPages {
       name: _Paths.SIGNATURE_CREATE,
       page: () => const SignatureCreateView(),
       binding: SignatureCreateBinding(),
+    ),
+    GetPage(
+      name: _Paths.ATASAN_CUTI,
+      page: () => const AtasanCutiView(),
+      binding: AtasanCutiBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIST_KARYAWAN,
+      page: () => const ListKaryawanView(),
+      binding: ListKaryawanBinding(),
     ),
   ];
 }

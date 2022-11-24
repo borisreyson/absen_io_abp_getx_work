@@ -98,6 +98,74 @@ class ProviderCuti {
     return ResultCuti.fromJson(jsonObject);
   }
 
+  Future<ResultCuti> batalkanPerpanjanganCutiOnline(
+      String username, String idCutiOnline, String keteranganBatal) async {
+    String apiUrl =
+        "https://lp.abpjobsite.com/api/v1/cuti/batalkan/perpanjangan";
+    var apiResult = await http.post(
+      Uri.parse(apiUrl),
+      body: {
+        "username": username,
+        "_method": "PUT",
+        "idCutiOnline": idCutiOnline,
+        "keteranganBatal": keteranganBatal
+      },
+    );
+    var jsonObject = json.decode(apiResult.body);
+    return ResultCuti.fromJson(jsonObject);
+  }
+
+  Future<ResultCuti> ubahTanggalCuti(
+    String username,
+    String idCutiOnline,
+    String dari,
+    String sampai,
+    String? tglMulaiCutiOnline,
+    String? tglSelesaiCutiOnline,
+    String? jenisCuti,
+  ) async {
+    String apiUrl = "https://lp.abpjobsite.com/api/v1/cuti/ubah/tanggal";
+    var apiResult = await http.post(
+      Uri.parse(apiUrl),
+      body: {
+        "username": username,
+        "_method": "PUT",
+        "idCutiOnline": idCutiOnline,
+        "dari": dari,
+        "sampai": sampai,
+        "tglMulaiCutiOnline": tglMulaiCutiOnline,
+        "tglSelesaiCutiOnline": tglSelesaiCutiOnline,
+      },
+    );
+    var jsonObject = json.decode(apiResult.body);
+    return ResultCuti.fromJson(jsonObject);
+  }
+  Future<ResultCuti> ubahTanggalPerpanjangan(
+    String username,
+    String idCutiOnline,
+    String dari,
+    String sampai,
+    String? tglMulaiCutiOnline,
+    String? tglSelesaiCutiOnline,
+    String? jenisCuti,
+  ) async {
+    String apiUrl = "https://lp.abpjobsite.com/api/v1/cuti/ubah/tanggal/perpanjangan";
+    var apiResult = await http.post(
+      Uri.parse(apiUrl),
+      body: {
+        "username": username,
+        "_method": "PUT",
+        "idCutiOnline": idCutiOnline,
+        "dari": dari,
+        "sampai": sampai,
+        "tglMulaiCutiOnline": tglMulaiCutiOnline,
+        "tglSelesaiCutiOnline": tglSelesaiCutiOnline,
+      },
+    );
+    var jsonObject = json.decode(apiResult.body);
+    return ResultCuti.fromJson(jsonObject);
+  }
+
   Future<ListCutiOnlineModels> getCutiDeptHead({department, page}) async {
     String apiUrl =
         "https://lp.abpjobsite.com/api/v1/cuti/get/dept/head?department=$department&page=$page";

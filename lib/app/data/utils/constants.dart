@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Constants {
   static const intro = "intro";
+  //abpenergy
   static const String isLoginAbp = "isLoginAbp";
   static const String username = "userName";
   static const String nik = "nik";
@@ -19,8 +20,11 @@ class Constants {
   static const String fotoProfile = "fotoProfile";
   static const String ttd = "ttd";
   static const String company = "company";
+  //domain
   static const String baseUrl = "https://lp.abpjobsite.com/";
   static const String mainUrl = "https://abpjobsite.com/";
+
+  //sqlite
   static const String kemungkinanTb = "KEMUNGKINAN";
   static const String keparahanTb = "KEPARAHAN";
   static const String metrikTb = "METRIK";
@@ -38,8 +42,12 @@ class Constants {
   static const String p2hDetail = "P2H_DETAIL";
   static const String p2hTemuan = "P2H_TEMUAN";
   static const String p2hPemeriksaan = "P2H_PEMERIKSAAN";
+  static const String dataKaryawanTb = "DATA_KARYAWAN";
+
+  //colors
   static const Color green = Color(0xFF488C03);
 
+//stream
   late StreamSubscription subscriptionVps;
   late StreamSubscription subscriptionServer;
   late StreamSubscription subscriptionLokal;
@@ -56,9 +64,10 @@ class Constants {
   static const String showAbsen = "showAbsen";
   static const String perusahaanAbsen = "perusahaanAbsen";
   static const String fotoProfileAbsen = "fotoProfileAbsen";
-
+//aplikasi
   static const String versiAplikasi = "versiAplikasi";
 
+//filependukung
   static const String musik1 = "musik1";
   static const String musik2 = "musik2";
   static const String musik2Time = "musik2Time";
@@ -141,7 +150,11 @@ class Constants {
               ? SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Center(child: Text(msg)),
+                      Center(
+                          child: Text(
+                        msg,
+                        textAlign: TextAlign.center,
+                      )),
                     ],
                   ),
                 )

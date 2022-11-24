@@ -173,6 +173,7 @@ abstract class Routes {
   static const SIGNATURE_CREATE = _Paths.SIGNATURE_CREATE;
   static const DAFTAR_P2H_HARIAN = _Paths.P2H + _Paths.DAFTAR_P2H_HARIAN;
   static const MENU_FORM_P2H = _Paths.P2H + _Paths.MENU_FORM_P2H;
+  static const ATASAN_CUTI = _Paths.ATASAN_CUTI;
 }
 
 abstract class _Paths {
@@ -340,4 +341,5 @@ abstract class _Paths {
   static const LOGIN_ABSENSI = '/login-absensi';
   static const DAFTAR_P2H_HARIAN = '/daftar-p2h-harian';
   static const MENU_FORM_P2H = '/menu-form-p2h';
+  static const ATASAN_CUTI = '/atasan-cuti';
 }

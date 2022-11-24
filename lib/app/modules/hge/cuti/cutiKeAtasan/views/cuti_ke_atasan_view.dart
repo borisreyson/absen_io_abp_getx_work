@@ -33,7 +33,7 @@ class CutiKeAtasanView extends GetView<CutiKeAtasanController> {
               ? ListView(
                   children: controller.dataCuti
                       .map(
-                        (e) => cardCuti(e),
+                        (e) => cardCuti(e, context),
                       )
                       .toList(),
                 )
@@ -45,7 +45,7 @@ class CutiKeAtasanView extends GetView<CutiKeAtasanController> {
     );
   }
 
-  Widget cardCuti(Data e) {
+  Widget cardCuti(Data e, context) {
     return Card(
       margin: const EdgeInsets.all(10),
       elevation: 10,
@@ -93,7 +93,7 @@ class CutiKeAtasanView extends GetView<CutiKeAtasanController> {
             ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: dataKaryawan(e),
+              child: dataKaryawan(e, context),
             ),
             if (e.atasanVerifikasi != null)
               Padding(
@@ -160,7 +160,7 @@ class CutiKeAtasanView extends GetView<CutiKeAtasanController> {
     );
   }
 
-  Widget dataKaryawan(Data e) {
+  Widget dataKaryawan(Data e, context) {
     var dari = controller.fmt.format(DateTime.parse("${e.tglMulaiCutiOnline}"));
     var sampai =
         controller.fmt.format(DateTime.parse("${e.tglSelesaiCutiOnline}"));
@@ -230,29 +230,10 @@ class CutiKeAtasanView extends GetView<CutiKeAtasanController> {
             textAlign: TextAlign.right,
           ),
         ]),
-        TableRow(children: [
-          const Text("Jenis Cuti"),
-          Text(
-            "${e.jenisCutiOnline}",
-            textAlign: TextAlign.right,
-          ),
-        ]),
-        TableRow(children: [
-          const Text("Tgl.Cuti"),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                dari,
-                textAlign: TextAlign.right,
-              ),
-              Text(
-                sampai,
-                textAlign: TextAlign.right,
-              ),
-            ],
-          ),
-        ]),
+        jenisCuti(e),
+        tglCuti(dari, sampai, e, context),
+        if (e.extendCutiOnline == 1) jenisPerpanjangCuti(e),
+        if (e.extendCutiOnline == 1) tglPerpanjangCuti(e, context),
         if (e.userBatalVerifikasi != null)
           TableRow(children: [
             const Padding(
@@ -385,5 +366,322 @@ class CutiKeAtasanView extends GetView<CutiKeAtasanController> {
         ),
       ),
     );
+  }
+
+  TableRow tglPerpanjangCuti(Data e, context) {
+    return TableRow(children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Tgl.Perpanjang Cuti",
+            style: TextStyle(
+                color: const Color.fromARGB(255, 150, 8, 8),
+                fontWeight: FontWeight.bold,
+                decoration: (e.userBatalPerpanjangan != null)
+                    ? TextDecoration.lineThrough
+                    : null),
+          ),
+          if (e.userBatalPerpanjangan == null)
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: ElevatedButton(
+                onPressed: () async {
+                  var res = await Get.defaultDialog(
+                    title: "Opsi",
+                    content: opsiPerpanjangan(e, context),
+                  );
+                },
+                child: const Text("Opsi Perpanjangan Cuti"),
+              ),
+            ),
+          if (e.userBatalPerpanjangan != null)
+            const Text(
+              "Perpanjangan Cuti Dibatalkan",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+        ],
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            (e.tahunanDariCutiOnline != null)
+                ? controller.fmt
+                    .format(DateTime.parse("${e.tahunanDariCutiOnline}"))
+                : "",
+            textAlign: TextAlign.right,
+            style: TextStyle(
+                color: const Color.fromARGB(255, 150, 8, 8),
+                fontWeight: FontWeight.bold,
+                decoration: (e.userBatalPerpanjangan != null)
+                    ? TextDecoration.lineThrough
+                    : null),
+          ),
+          Text(
+            (e.tahunanSampaiCutiOnline != null)
+                ? controller.fmt
+                    .format(DateTime.parse("${e.tahunanSampaiCutiOnline}"))
+                : "",
+            textAlign: TextAlign.right,
+            style: TextStyle(
+                color: const Color.fromARGB(255, 150, 8, 8),
+                fontWeight: FontWeight.bold,
+                decoration: (e.userBatalPerpanjangan != null)
+                    ? TextDecoration.lineThrough
+                    : null),
+          ),
+        ],
+      ),
+    ]);
+  }
+
+  SizedBox opsiPerpanjangan(Data e, context) {
+    var dari = (e.tahunanDariCutiOnline != null)
+        ? controller.fmt.format(DateTime.parse("${e.tahunanDariCutiOnline}"))
+        : "";
+    var sampai = (e.tahunanSampaiCutiOnline != null)
+        ? controller.fmt.format(DateTime.parse("${e.tahunanSampaiCutiOnline}"))
+        : "";
+    return SizedBox(
+      child: Column(
+        children: [
+          SizedBox(
+            width: Get.width,
+            child: Card(
+              color: Colors.blue,
+              elevation: 10,
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Text(
+                      "Tanggal Perpanjangan",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "${e.cutiTahunanOnline}",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "$dari",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "$sampai",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: Get.width,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(5),
+                backgroundColor: Colors.orange,
+              ),
+              onPressed: () async {
+                controller.dari.value =
+                    DateTime.parse("${e.tahunanDariCutiOnline}");
+                controller.sampai.value =
+                    DateTime.parse("${e.tahunanSampaiCutiOnline}");
+                var res = await _showBottomDialog(context);
+                if (res != null) {
+                  controller.ubahPerpanjangan(
+                      e.idCutiOnline,
+                      res,
+                      e.tahunanDariCutiOnline,
+                      e.tahunanSampaiCutiOnline,
+                      e.cutiTahunanOnline);
+                }
+              },
+              child: const Text("Ubah Perpanjangan Cuti"),
+            ),
+          ),
+          SizedBox(
+            width: Get.width,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(5),
+                backgroundColor: Colors.red,
+              ),
+              onPressed: () {
+                controller.batalkanPerpanjangan(e.idCutiOnline);
+              },
+              child: const Text("Batalkan Perpanjangan Cuti"),
+            ),
+          ),
+          SizedBox(
+            width: Get.width,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(5),
+                backgroundColor: Colors.black,
+              ),
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text("Tutup"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  TableRow jenisPerpanjangCuti(Data e) {
+    return TableRow(children: [
+      Text(
+        "Perpanjang Cuti",
+        style: TextStyle(
+            color: const Color.fromARGB(255, 150, 8, 8),
+            fontWeight: FontWeight.bold,
+            decoration: (e.userBatalPerpanjangan != null)
+                ? TextDecoration.lineThrough
+                : null),
+      ),
+      Text(
+        "${e.cutiTahunanOnline}",
+        textAlign: TextAlign.right,
+        style: TextStyle(
+            color: const Color.fromARGB(255, 150, 8, 8),
+            fontWeight: FontWeight.bold,
+            decoration: (e.userBatalPerpanjangan != null)
+                ? TextDecoration.lineThrough
+                : null),
+      ),
+    ]);
+  }
+
+  TableRow jenisCuti(Data e) {
+    return TableRow(children: [
+      const Text("Jenis Cuti",
+          style: TextStyle(
+              color: Color.fromARGB(255, 7, 71, 9),
+              fontWeight: FontWeight.bold)),
+      Text("${e.jenisCutiOnline}",
+          textAlign: TextAlign.right,
+          style: const TextStyle(
+              color: Color.fromARGB(255, 7, 71, 9),
+              fontWeight: FontWeight.bold)),
+    ]);
+  }
+
+  TableRow tglCuti(String dari, String sampai, Data e, context) {
+    return TableRow(children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Tgl.Cuti",
+            style: TextStyle(
+                color: Color.fromARGB(255, 7, 71, 9),
+                fontWeight: FontWeight.bold),
+          ),
+          if (e.userBatalVerifikasi == null)
+            if (e.atasanVerifikasi == null)
+              Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(5),
+                    backgroundColor: Colors.orange,
+                  ),
+                  onPressed: () async {
+                    controller.dari.value =
+                        DateTime.parse("${e.tglMulaiCutiOnline}");
+                    controller.sampai.value =
+                        DateTime.parse("${e.tglSelesaiCutiOnline}");
+                    var res = await _showBottomDialog(context);
+                    if (res != null) {
+                      // print("${e.tglSelesaiCutiOnline}");
+                      controller.ubahTanggalCuti(
+                          e.idCutiOnline,
+                          res,
+                          e.tglMulaiCutiOnline,
+                          e.tglSelesaiCutiOnline,
+                          e.jenisCutiOnline);
+                    }
+                  },
+                  child: const Text("Ubah Tanggal Cuti"),
+                ),
+              ),
+        ],
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(dari,
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 7, 71, 9),
+                  fontWeight: FontWeight.bold)),
+          Text(sampai,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 7, 71, 9),
+                  fontWeight: FontWeight.bold)),
+        ],
+      ),
+    ]);
+  }
+
+  _showBottomDialog(context) {
+    return showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        useRootNavigator: true,
+        context: context,
+        builder: (context) {
+          return Stack(
+            children: [
+              Card(
+                margin: const EdgeInsets.only(top: 40),
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 8, right: 8),
+                  child: ListView(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      controller.tglPick("Dari", controller.dari.value),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      controller.tglPick("Sampai", controller.sampai.value),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      controller.submitWidgetDTrange()
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0, right: 8.0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Card(
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(150),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        customBorder: const CircleBorder(),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.keyboard_arrow_down),
+                        ),
+                      )),
+                ),
+              )
+            ],
+          );
+        });
   }
 }

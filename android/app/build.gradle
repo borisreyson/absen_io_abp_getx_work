@@ -13,20 +13,36 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '19'
+    flutterVersionCode = '1'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '7.6.9'
+    flutterVersionName = '1.0'
+}
+
+def flutterminSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
+if (flutterminSdkVersion == null) {
+    flutterminSdkVersion = '29'
+}
+
+def fluttertargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
+if (fluttertargetSdkVersion == null) {
+    fluttertargetSdkVersion = '19'
+}
+def fluttercompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
+if (fluttercompileSdkVersion == null) {
+    fluttercompileSdkVersion = '33'
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
+
 android {
-    compileSdkVersion 33
+    compileSdkVersion fluttercompileSdkVersion.toInteger()
+    ndkVersion flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -44,8 +60,10 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.misit.faceidplus"
-        minSdkVersion 28
-        targetSdkVersion 33
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+        minSdkVersion flutterminSdkVersion.toInteger()
+        targetSdkVersion fluttertargetSdkVersion.toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
