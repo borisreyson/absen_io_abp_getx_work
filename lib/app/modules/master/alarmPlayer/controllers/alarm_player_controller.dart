@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:face_id_plus/app/data/utils/constants.dart';
 import 'package:get/get.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
@@ -30,10 +29,6 @@ class AlarmPlayerController extends GetxController {
   }
 
   playAssets() {
-    var file = File("${alaram1.value}");
-
-    AssetsAudioPlayer.newPlayer()
-        .open(Audio("${file.path}"), autoStart: true, volume: 5);
   }
 
   alaramLokal() async {
