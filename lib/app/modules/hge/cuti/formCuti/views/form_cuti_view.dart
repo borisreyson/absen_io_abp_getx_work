@@ -29,7 +29,7 @@ class FormCutiView extends GetView<FormCutiController> {
                   "Nama Atasan",
                   readonly: true,
                   onTap: () async {
-                    var result = await Get.toNamed(Routes.LIST_KARYAWAN);
+                    var result = await Get.toNamed(Routes.ATASAN_CUTI);
                     if (result != null) {
                       controller.dataKaryawan.value = result;
                       controller.namaAtasanCtrl.value.text =

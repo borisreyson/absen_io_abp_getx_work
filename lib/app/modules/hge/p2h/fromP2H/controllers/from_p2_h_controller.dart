@@ -51,9 +51,10 @@ class FromP2HController extends GetxController {
     }
 
     var scanner = await Get.arguments['saranaId'];
+    print("sarana ${scanner}");
     if (scanner != null) {
-      saranaId.value = scanner[1];
-      noPol.value = scanner[2];
+      saranaId.value = scanner[0];
+      noPol.value = scanner[1];
       getDetailSarana(saranaId.value);
     }
     super.onInit();
@@ -97,7 +98,8 @@ class FromP2HController extends GetxController {
 
       var post = await service.save(data);
       if (post > 0) {
-        Get.toNamed(Routes.DAFTAR_PEMERIKSAAN_P2_H,arguments: {"header":data.idHeader});
+        Get.toNamed(Routes.DAFTAR_PEMERIKSAAN_P2_H,
+            arguments: {"header": data.idHeader});
       }
     }
   }

@@ -1,13 +1,13 @@
 import 'package:face_id_plus/app/data/utils/constants.dart';
 import 'package:face_id_plus/app/modules/hge/cuti/models/form_cuti_model.dart';
 import 'package:face_id_plus/app/routes/app_pages.dart';
+import 'package:face_id_plus/app/sqlite_db/models/data_karyawan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-import 'package:face_id_plus/app/data/models/data_karayawan.dart' as karyawan;
 
 class FormCutiController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -32,7 +32,7 @@ class FormCutiController extends GetxController {
   final nama = RxnString(null);
   final nik = RxnString(null);
   final nikAtasan = RxnString(null);
-  final dataKaryawan = karyawan.Data().obs;
+  final dataKaryawan = DataKaryawan().obs;
   @override
   void onInit() async {
     var pref = await SharedPreferences.getInstance();
