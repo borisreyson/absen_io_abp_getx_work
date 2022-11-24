@@ -1,3 +1,5 @@
+import 'package:face_id_plus/app/sqlite_db/models/data_karyawan_model.dart';
+
 import '../models/all_hazard_model.dart';
 import '../models/counter_hazard.dart';
 import '../models/detail_keparahan_model.dart';
@@ -81,6 +83,16 @@ class UsersRepository {
 
   Future<UserProfileModel?> fetchUserProfile(username) async {
     return await _provider.getUsersProfile(username);
+  }
+}
+class KaryawanRepository {
+  final _provider = KaryawanProvider();
+  Future<DataKarayawanModels?> fetchAll() async {
+    return await _provider.getKaryawan();
+  }
+
+  Future<DataKarayawanModels?> fetchKaryawanProfile(nama) async {
+    return await _provider.getKaryawanProfile(nama);
   }
 }
 

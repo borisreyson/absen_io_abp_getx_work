@@ -164,6 +164,7 @@ class ListCutiView extends GetView<ListCutiController> {
     var dari = controller.fmt.format(DateTime.parse("${e.tglMulaiCutiOnline}"));
     var sampai =
         controller.fmt.format(DateTime.parse("${e.tglSelesaiCutiOnline}"));
+
     return Table(
       children: [
         TableRow(children: [
@@ -228,29 +229,10 @@ class ListCutiView extends GetView<ListCutiController> {
             textAlign: TextAlign.right,
           ),
         ]),
-        TableRow(children: [
-          const Text("Jenis Cuti"),
-          Text(
-            "${e.jenisCutiOnline}",
-            textAlign: TextAlign.right,
-          ),
-        ]),
-        TableRow(children: [
-          const Text("Tgl.Cuti"),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                dari,
-                textAlign: TextAlign.right,
-              ),
-              Text(
-                sampai,
-                textAlign: TextAlign.right,
-              ),
-            ],
-          ),
-        ]),
+        jenisCuti(e),
+        tglCuti(dari, sampai),
+        if (e.extendCutiOnline == 1) jenisPerpanjangCuti(e),
+        if (e.extendCutiOnline == 1) tglPerpanjangCuti(e),
         if (e.userBatalVerifikasi != null)
           TableRow(children: [
             const Padding(
@@ -273,6 +255,90 @@ class ListCutiView extends GetView<ListCutiController> {
         if (e.userBatalVerifikasi != null) keteranganBatalVerifikasi(e),
       ],
     );
+  }
+
+  TableRow jenisCuti(Data e) {
+    return TableRow(children: [
+        const Text("Jenis Cuti",
+            style: TextStyle(
+                color: Color.fromARGB(255, 7, 71, 9),
+                fontWeight: FontWeight.bold)),
+        Text("${e.jenisCutiOnline}",
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+                color: Color.fromARGB(255, 7, 71, 9),
+                fontWeight: FontWeight.bold)),
+      ]);
+  }
+
+  TableRow tglCuti(String dari, String sampai) {
+    return TableRow(children: [
+        const Text("Tgl.Cuti",
+            style: TextStyle(
+                color: Color.fromARGB(255, 7, 71, 9),
+                fontWeight: FontWeight.bold)),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(dari,
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 7, 71, 9),
+                    fontWeight: FontWeight.bold)),
+            Text(sampai,
+                textAlign: TextAlign.right,
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 7, 71, 9),
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ]);
+  }
+
+  TableRow tglPerpanjangCuti(Data e) {
+    return TableRow(children: [
+      const Text("Tgl.Perpanjang Cuti",
+          style: TextStyle(
+              color: Color.fromARGB(255, 150, 8, 8),
+              fontWeight: FontWeight.bold)),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+              (e.tahunanDariCutiOnline != null)
+                  ? controller.fmt
+                      .format(DateTime.parse("${e.tahunanDariCutiOnline}"))
+                  : "",
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 150, 8, 8),
+                  fontWeight: FontWeight.bold)),
+          Text(
+              (e.tahunanSampaiCutiOnline != null)
+                  ? controller.fmt
+                      .format(DateTime.parse("${e.tahunanSampaiCutiOnline}"))
+                  : "",
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                  color: Color.fromARGB(255, 150, 8, 8),
+                  fontWeight: FontWeight.bold)),
+        ],
+      ),
+    ]);
+  }
+
+  TableRow jenisPerpanjangCuti(Data e) {
+    return TableRow(children: [
+      const Text("Perpanjang Cuti",
+          style: TextStyle(
+              color: Color.fromARGB(255, 150, 8, 8),
+              fontWeight: FontWeight.bold)),
+      Text(
+        "${e.cutiTahunanOnline}",
+        textAlign: TextAlign.right,
+        style: const TextStyle(
+            color: Color.fromARGB(255, 150, 8, 8), fontWeight: FontWeight.bold),
+      ),
+    ]);
   }
 
   TableRow batalVerifikasi(Data e) {

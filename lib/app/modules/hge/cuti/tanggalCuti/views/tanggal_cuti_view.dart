@@ -46,8 +46,17 @@ class TanggalCutiView extends GetView<TanggalCutiController> {
               inputBox(controller.bukanLapanganCtrl.value,
                   controller.bukanLapanganFocus.value, 1, "Tanggal Cuti",
                   readonly: true, onTap: () async {
-                _showBottomDialog(context);
+                var res = await _showBottomDialog(context);
+                if (res != null) {
+                  var durasi = "${res['dari']} - ${res['sampai']}";
+                  controller.mulai.value = "${res['dari']} ";
+                  controller.selesai.value = "${res['sampai']} ";
+                  controller.bukanLapanganCtrl.value.text = durasi;
+                }
               }, padding: 5),
+            if (controller.jenisCutiCtrl.value.text == "Cuti Lapangan" &&
+                controller.tanggalCutiValue.value != null)
+              extendCutiTahunan(context),
             inputBox(controller.berangkatDariCtrl.value,
                 controller.berangkatDariFocus.value, 1, "Berangkat Dari Site",
                 readonly: true, onTap: () async {
@@ -70,6 +79,34 @@ class TanggalCutiView extends GetView<TanggalCutiController> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget extendCutiTahunan(context) {
+    controller.jenisCutiExtendCtrl.value.text = "Cuti Tahunan";
+    return Column(
+      children: [
+        widgetPerpanjangCuti(context),
+        if (controller.dgnCutiTahunan.value == 1)
+          Column(
+            children: [
+              inputBox(controller.jenisCutiExtendCtrl.value,
+                  controller.jenisCutiExtendFocus.value, 1, "Jenis Cuti",
+                  readonly: true, padding: 5),
+              inputBox(controller.tahunanExtendCtrl.value,
+                  controller.tahunanExtendFocus.value, 1, "Tanggal Cuti",
+                  readonly: true, onTap: () async {
+                var res = await _showBottomDialog(context);
+                if (res != null) {
+                  var durasi = "${res['dari']} - ${res['sampai']}";
+                  controller.tahunanDari.value = "${res['dari']} ";
+                  controller.tahunanSampai.value = "${res['sampai']} ";
+                  controller.tahunanExtendCtrl.value.text = durasi;
+                }
+              }, padding: 5),
+            ],
+          ),
+      ],
     );
   }
 
@@ -201,6 +238,46 @@ class TanggalCutiView extends GetView<TanggalCutiController> {
             ),
           ],
         )
+      ],
+    );
+  }
+
+  Widget widgetPerpanjangCuti(context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('Dengan Cuti Tahunan?'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    const Text("Ya"),
+                    Radio(
+                        value: 1,
+                        groupValue: controller.dgnCutiTahunan.value,
+                        onChanged: (a) {
+                          controller.dgnCutiTahunan.value = int.parse("$a");
+                        })
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text("Tidak"),
+                    Radio(
+                        value: 2,
+                        groupValue: controller.dgnCutiTahunan.value,
+                        onChanged: (int? a) {
+                          controller.dgnCutiTahunan.value = int.parse("$a");
+                        })
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
       ],
     );
   }

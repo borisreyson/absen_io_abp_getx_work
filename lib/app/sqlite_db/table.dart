@@ -208,4 +208,28 @@ class Table {
               """;
     db.execute(sql);
   }
+
+  dataKaryawan(Batch db) {
+    var sql = """
+              CREATE TABLE ${Constants.dataKaryawanTb} 
+              (no INTEGER PRIMARY KEY AUTOINCREMENT, 
+              nik TEXT, 
+              nama TEXT, 
+              departemen TEXT, 
+              devisi TEXT, 
+              jabatan  TEXT,
+              user_entry  TEXT,
+              tgl_entry  TEXT,
+              tgl_up  TEXT,
+              password  TEXT,
+              flag  INTEGER,
+              show_absen  INTEGER,
+              dt_update TEXT,
+              perusahaan INTEGER,
+              dept TEXT,
+              sect TEXT,
+              nama_perusahaan TEXT)
+              """;
+    db.execute(sql);
+  }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_is_empty
 
+import 'package:face_id_plus/app/sqlite_db/models/data_karyawan_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../sqlite_db/db_helper.dart';
@@ -585,6 +586,87 @@ class RepositoryUsers {
     var res = await conn!.rawQuery("SELECT * FROM $table");
     for (var e in res) {
       data.add(UsersList.fromJson(e));
+    }
+    return data;
+  }
+
+  deleteAll(table) async {
+    var conn = await db;
+    var res = await conn?.delete(table);
+    return res;
+  }
+}
+
+class RepositoryDataKaryawan {
+  late DbHelper _dbHelper;
+  RepositoryDataKaryawan() {
+    _dbHelper = DbHelper();
+  }
+
+  static Database? _db;
+  Future<Database?> get db async {
+    if (_db != null) {
+      return _db;
+    } else {
+      _db = await _dbHelper.setDatabase();
+      return _db;
+    }
+  }
+
+  insert(table, DataKaryawan data) async {
+    var conn = await db;
+    var qRes = await conn!
+        .rawQuery("SELECT count(*) FROM $table WHERE nik = '${data.nik}'");
+    var res = Sqflite.firstIntValue(qRes);
+    if (res != null) {
+      if (res > 0) {
+        if (qRes[0]['dt_update'] != data.dtUpdate) {
+          return await conn.update(table, data.toJson(),
+              where: "nik = ?", whereArgs: ["${data.nik}"]);
+        }
+        return 0;
+      } else {
+        return await conn.insert(table, data.toJson());
+      }
+    } else {
+      return await conn.insert(table, data.toJson());
+    }
+  }
+
+  Future<List<DataKaryawan>> getById({String? table, int? nik}) async {
+    var conn = await db;
+    List<DataKaryawan> data = [];
+    var res = await conn!.rawQuery("SELECT * FROM $table WHERE nik =$nik");
+    for (var e in res) {
+      data.add(DataKaryawan.fromJson(e));
+    }
+    return data;
+  }
+
+  Future<List<DataKaryawan>> cariNama({String? table, String? nama}) async {
+    var conn = await db;
+    List<DataKaryawan> data = [];
+    late String sql;
+    print("nama $nama");
+    if (nama != null) {
+      sql = "SELECT * FROM $table WHERE nama LIKE '%" + nama + "%'";
+    } else {
+      sql = "SELECT * FROM $table";
+    }
+    print("sql $sql");
+    var res = await conn!.rawQuery(sql);
+    for (var e in res) {
+      data.add(DataKaryawan.fromJson(e));
+    }
+    return data;
+  }
+
+  Future<List<DataKaryawan>> getAll({String? table}) async {
+    var conn = await db;
+    List<DataKaryawan> data = [];
+    var res = await conn!.rawQuery("SELECT * FROM $table");
+    for (var e in res) {
+      data.add(DataKaryawan.fromJson(e));
     }
     return data;
   }

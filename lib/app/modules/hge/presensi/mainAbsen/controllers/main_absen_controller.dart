@@ -114,7 +114,7 @@ class MainAbsenController extends GetxController {
     subs3?.cancel();
     subs4?.cancel();
     if (!pingServer.isClosed) {
-      pingServer.close();
+      // pingServer.close();
     }
     if (!pingServerOnline.isClosed) {
       pingServerOnline.close();

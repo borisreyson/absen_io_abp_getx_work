@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, duplicate_ignore
 
 import 'package:face_id_plus/app/data/services/service.dart';
+import 'package:face_id_plus/app/sqlite_db/models/data_karyawan_model.dart';
 import 'package:flutter/foundation.dart';
 
 import '../models/detail_keparahan_model.dart';
@@ -227,6 +228,24 @@ class ApiService {
             var res = await UsersService().save(data);
             if (kDebugMode) {
               print("Users $res");
+            }
+          }
+        }
+      }
+    });
+  }
+
+  Future karyawanGet() async {
+    await KaryawanRepository().fetchAll().then((_data) async {
+      if (_data != null) {
+        if (_data.dataKaryawan != null) {
+          var data = _data.dataKaryawan;
+          for (var e in data!) {
+            var data = DataKaryawan();
+            data = e;
+            var res = await DataKaryawanService().save(data);
+            if (kDebugMode) {
+              print("Karyawan $res");
             }
           }
         }

@@ -16,7 +16,9 @@ class TanggalCutiController extends GetxController {
   final tglMembawaKeluargaCtrl = TextEditingController().obs;
   final tglCutiCtrl = TextEditingController().obs;
   final jenisCutiCtrl = TextEditingController().obs;
+  final jenisCutiExtendCtrl = TextEditingController().obs;
   final bukanLapanganCtrl = TextEditingController().obs;
+  final tahunanExtendCtrl = TextEditingController().obs;
   final berangkatDariCtrl = TextEditingController().obs;
   final kembaliKeCtrl = TextEditingController().obs;
 
@@ -24,18 +26,21 @@ class TanggalCutiController extends GetxController {
   final tglMembawaKeluargaFocus = FocusNode().obs;
   final tglCutiFocus = FocusNode().obs;
   final jenisCutiFocus = FocusNode().obs;
+  final jenisCutiExtendFocus = FocusNode().obs;
   final bukanLapanganFocus = FocusNode().obs;
+  final tahunanExtendFocus = FocusNode().obs;
   final berangkatDariFocus = FocusNode().obs;
   final kembaliKeFocus = FocusNode().obs;
 
   final formKey = GlobalKey<FormState>();
   final keluarga = RxInt(2);
+  final dgnCutiTahunan = RxInt(2);
   final tiketPesawat = RxInt(2);
   final fmt = DateFormat('dd MMMM yyyy');
   final dt = DateTime.now();
   final idCuti = RxnString(null);
+  final tanggalCutiValue = RxnString(null);
   final dari = DateTime.now().obs, sampai = DateTime.now().obs;
-
   Future<DateTime?> selectDate(BuildContext context, DateTime initDate) async {
     return await DatePicker.showDatePicker(context,
         showTitleActions: true, minTime: dt, currentTime: initDate);
@@ -48,6 +53,10 @@ class TanggalCutiController extends GetxController {
   final mulai = RxnString(null);
   final selesai = RxnString(null);
   final resultTest = RxnString(null);
+
+  final tahunanDari = RxnString(null);
+  final tahunanSampai = RxnString(null);
+
   @override
   void onInit() async {
     var ar = await Get.arguments;
@@ -70,11 +79,14 @@ class TanggalCutiController extends GetxController {
           fmt.format(DateTime.parse("${dataRoster.value.tglMulaiCuti}"));
       selesai.value =
           fmt.format(DateTime.parse("${dataRoster.value.tglSelesaiCuti}"));
-      tglCutiCtrl.value.text = "$mulai - $selesai";
+      tanggalCutiValue.value = "$mulai - $selesai";
+      tglCutiCtrl.value.text = "${tanggalCutiValue.value}";
     }
   }
 
   tapJenisCuti() async {
+    dari.value = DateTime.now();
+    sampai.value = DateTime.now();
     var res = await Get.toNamed(Routes.JENIS_CUTI);
     if (res != null) {
       if (res == "Cuti Lapangan") {
@@ -147,12 +159,13 @@ class TanggalCutiController extends GetxController {
           onTap: () async {
             mulai.value = fmt.format(dari.value);
             selesai.value = fmt.format(sampai.value);
-            var durasiCuti =
-                "${fmt.format(dari.value)} - ${fmt.format(sampai.value)}";
+            // var durasiCuti =
+            //     "${fmt.format(dari.value)} - ${fmt.format(sampai.value)}";
 
-            bukanLapanganCtrl.value.text = durasiCuti;
-
-            Get.back();
+            Get.back(result: {
+              "dari": fmt.format(dari.value),
+              "sampai": fmt.format(sampai.value)
+            });
           },
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -182,6 +195,7 @@ class TanggalCutiController extends GetxController {
       cutiPost.formCuti = formCuti.value;
       cutiPost.tglCuti = body;
       cutiPost.tiketCuti = null;
+      print("body ${body.toJson()}");
       await provider.cutiPostApi(cutiPost).then((value) {
         var res = value.success;
         if (res!) {
@@ -218,6 +232,12 @@ class TanggalCutiController extends GetxController {
     body.tiketPesawat = "${tiketPesawat.value}";
     body.berangkatDari = berangkatDariCtrl.value.text;
     body.kembaliKe = kembaliKeCtrl.value.text;
+    if (dgnCutiTahunan.value == 1) {
+      body.extendCuti = "${dgnCutiTahunan.value}";
+      body.cutiTahunan = jenisCutiExtendCtrl.value.text;
+      body.tahunanDari = tahunanDari.value;
+      body.tahunanSampai = tahunanSampai.value;
+    }
     return body;
   }
 }

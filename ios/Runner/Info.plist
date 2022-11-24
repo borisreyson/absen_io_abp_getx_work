@@ -13,7 +13,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>7.6.5</string>
+	<string>7.6.9</string>
 	<key>CFBundleName</key>
 	<string>absen_io_abp</string>
 	<key>CFBundlePackageType</key>

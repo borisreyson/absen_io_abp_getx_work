@@ -26,6 +26,7 @@ class SplashController extends GetxController
   var dio = Dio();
   final progress = RxDouble(0.0);
   final provider = SplashProvider();
+  // ignore: prefer_typing_uninitialized_variables
   late var camera;
   final newPath = RxString("");
 
@@ -222,16 +223,10 @@ class SplashController extends GetxController
           if (await downloadFile(1)) {
             pref.setString(Constants.musik1, "${res[0].namaFile}");
             pref.setString(Constants.musik1Time, "${res[0].updateFile}");
-            print("OK");
-          } else {
-            print("Not OK");
           }
           if (await downloadFile(2)) {
             pref.setString(Constants.musik2, "${res[1].namaFile}");
             pref.setString(Constants.musik2Time, "${res[1].updateFile}");
-            print("1OK");
-          } else {
-            print("1Not OK");
           }
         } else {
           var dtUpdate = DateTime.parse("$waktuPertama");
@@ -243,9 +238,6 @@ class SplashController extends GetxController
               pref.setString(
                   Constants.musik1, "${newPath.value}/${res[0].namaFile}");
               pref.setString(Constants.musik1Time, "${res[0].updateFile}");
-              print("2OK");
-            } else {
-              print("2Not OK");
             }
           }
           if (waktub.isAfter(dtUpdate2)) {
@@ -253,9 +245,6 @@ class SplashController extends GetxController
               pref.setString(
                   Constants.musik2, "${newPath.value}/${res[1].namaFile}");
               pref.setString(Constants.musik2Time, "${res[1].updateFile}");
-              print("3OK");
-            } else {
-              print("3Not OK");
             }
           }
         }
@@ -279,7 +268,6 @@ class SplashController extends GetxController
   Future<bool> downloadFile(index) async {
     var namaFile = "musik${index}.mp3";
     var url = "https://abpjobsite.com/musik${index}.mp3";
-    print("namaFile $namaFile");
     Directory? directory;
     try {
       if (Platform.isAndroid) {
@@ -287,18 +275,15 @@ class SplashController extends GetxController
         if (int.parse("${osVersion.version.release}") > 10) {
           if (await _reqPermission(Permission.storage)) {
             directory = await getExternalStorageDirectory();
-            print(directory?.path);
 
             newPath.value = "${directory?.path}/AbpEnergy/Musik";
             directory = Directory(newPath.value);
           } else {
-            print("error1");
             return false;
           }
         } else {
           if (await _reqPermission(Permission.storage)) {
             directory = await getExternalStorageDirectory();
-            print(directory?.path);
             List<String>? folders = directory?.path.split("/");
             for (int x = 1; x < folders!.length; x++) {
               String folder = folders[x];
@@ -311,7 +296,6 @@ class SplashController extends GetxController
             newPath.value = "${newPath.value}/AbpEnergy/Musik";
             directory = Directory(newPath.value);
           } else {
-            print("error3");
             return false;
           }
         }
@@ -331,7 +315,6 @@ class SplashController extends GetxController
             options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),
             onReceiveProgress: (downloaded, totalSize) {
           progress.value = (downloaded / totalSize) * 100;
-          print("loading ${progress.value}");
         });
         if (Platform.isIOS) {
           await ImageGallerySaver.saveFile(saveFile.path,
@@ -342,8 +325,6 @@ class SplashController extends GetxController
     } catch (e) {
       print("Error $e");
     }
-    print("error2");
-
     return false;
   }
 }

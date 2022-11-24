@@ -13,6 +13,7 @@ import 'package:face_id_plus/app/data/models/sarpras_detail.dart';
 import 'package:face_id_plus/app/data/models/sarpras_list.dart' as sarpras;
 import 'package:face_id_plus/app/data/models/sarpras_penumpang.dart';
 import 'package:face_id_plus/app/modules/home/buletin_model.dart' as buletin;
+import 'package:face_id_plus/app/sqlite_db/models/data_karyawan_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get_connect.dart';
 import 'package:path_provider/path_provider.dart';
@@ -466,6 +467,24 @@ class UsersProvider {
         "${Constants.mainUrl}android/api/get/user?username=$username"));
     var jsonObject = json.decode(api.body);
     var decoJson = UserProfileModel.fromJson(jsonObject);
+    return decoJson;
+  }
+}
+
+class KaryawanProvider {
+  Future<DataKarayawanModels?> getKaryawan() async {
+    var api = await http
+        .get(Uri.parse("${Constants.baseUrl}api/v1/data/karyawan/repository"));
+    var jsonObject = json.decode(api.body);
+    var decoJson = DataKarayawanModels.fromJson(jsonObject);
+    return decoJson;
+  }
+
+  Future<DataKarayawanModels?> getKaryawanProfile(nama) async {
+    var api = await http.get(Uri.parse(
+        "${Constants.baseUrl}api/v1/data/karyawan/repository?nama=$nama"));
+    var jsonObject = json.decode(api.body);
+    var decoJson = DataKarayawanModels.fromJson(jsonObject);
     return decoJson;
   }
 }

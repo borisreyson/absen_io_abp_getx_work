@@ -16,7 +16,7 @@ class TiketPesawatCutiView extends GetView<TiketPesawatCutiController> {
           centerTitle: true,
         ),
         body: Form(
-          key: controller.formKey,
+          key: controller.formKey.value,
           child: Stack(
             children: [
               Container(

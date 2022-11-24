@@ -270,6 +270,8 @@ class MenuAbpController extends GetxController
 
     await _service.usersGet();
     listString.add("user");
+    await _service.karyawanGet();
+    listString.add("karyawan");
 
     await provider
         .insertDeviceUpdate(idDevice.value, listString)
@@ -364,6 +366,13 @@ class MenuAbpController extends GetxController
         listString.add("user");
         if (kDebugMode) {
           print("tipe $tipe 9");
+        }
+        break;
+      case "karayawan":
+        await _service.karyawanGet();
+        listString.add("karyawan");
+        if (kDebugMode) {
+          print("tipe $tipe 10");
         }
         break;
     }

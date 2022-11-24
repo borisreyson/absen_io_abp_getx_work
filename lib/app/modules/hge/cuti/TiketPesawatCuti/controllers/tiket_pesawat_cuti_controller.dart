@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 
 class TiketPesawatCutiController extends GetxController {
   final provider = ProviderCuti();
-  final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>().obs;
   final namaCtrl = TextEditingController();
   final tglLahirCtrl = TextEditingController();
   final hpCtrl = TextEditingController();
@@ -64,7 +64,7 @@ class TiketPesawatCutiController extends GetxController {
   }
 
   void simpanCuti() async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.value.currentState!.validate()) {
       Constants().showAlert(
         dismiss: true,
         loading: true,

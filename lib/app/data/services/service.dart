@@ -1,3 +1,5 @@
+import 'package:face_id_plus/app/sqlite_db/models/data_karyawan_model.dart';
+
 import '../models/detail_keparahan_model.dart';
 import '../models/detail_pengendalian_model.dart';
 import '../models/device_update_model.dart';
@@ -206,6 +208,33 @@ class UsersService {
 
   deletAll() async {
     var res = await _repository.deleteAll(Constants.usersTb);
+    return res;
+  }
+}
+
+class DataKaryawanService {
+  late RepositoryDataKaryawan _repository;
+  DataKaryawanService() {
+    _repository = RepositoryDataKaryawan();
+  }
+
+  save(data) async {
+    return await _repository.insert(Constants.dataKaryawanTb, data);
+  }
+
+  Future<List<DataKaryawan>> getBy({int? nik}) async {
+    var res =
+        await _repository.getById(table: Constants.dataKaryawanTb, nik: nik);
+    return res;
+  }
+  Future<List<DataKaryawan>> getByName({String? nama}) async {
+    var res =
+        await _repository.cariNama(table: Constants.dataKaryawanTb, nama: nama);
+    return res;
+  }
+
+  deletAll() async {
+    var res = await _repository.deleteAll(Constants.dataKaryawanTb);
     return res;
   }
 }

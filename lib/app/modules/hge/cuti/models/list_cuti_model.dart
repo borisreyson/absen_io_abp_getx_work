@@ -117,46 +117,60 @@ class Data {
   String? namaHc;
   String? ttdHc;
   String? department;
-
-  Data(
-      {this.idCutiOnline,
-      this.namaCutiOnline,
-      this.nikCutiOnline,
-      this.statusKeluargaCutiOnline,
-      this.statusKaryawanCutiOnline,
-      this.tglMulaiBekerjaCutiOnline,
-      this.alamatCutiOnline,
-      this.membawaKeluargacutiOnline,
-      this.tglMembawaKeluargaCutiOnline,
-      this.atasanCutiOnline,
-      this.jenisCutiOnline,
-      this.tglMulaiCutiOnline,
-      this.tglSelesaiCutiOnline,
-      this.kodeCutiOnline,
-      this.tiketPesawatCutiOnline,
-      this.idVerifikasi,
-      this.atasanVerifikasi,
-      this.tglPengajuanCutiOnline,
-      this.waktuAtasanVerifikasi,
-      this.deptHeadVerifikasi,
-      this.waktuDeptHeadVerifikasi,
-      this.kttVerifikasi,
-      this.waktuKttVerifikasi,
-      this.userBatalVerifikasi,
-      this.hcVerifikasi,
-      this.waktuHcVerifikasi,
-      this.waktuBatalVerifikasi,
-      this.keteranganBatalVerifikasi,
-      this.namaBatal,
-      this.namaAtasan,
-      this.ttdAtasan,
-      this.namaDeptHead,
-      this.ttdDeptHead,
-      this.namaKtt,
-      this.ttdKtt,
-      this.namaHc,
-      this.ttdHc,
-      this.department});
+  int? extendCutiOnline;
+  String? cutiTahunanOnline;
+  String? tahunanDariCutiOnline;
+  String? tahunanSampaiCutiOnline;
+  String? userBatalPerpanjangan;
+  String? tglBatalPerpanjangan;
+  String? keteranganBatalPerpanjangan;
+  Data({
+    this.idCutiOnline,
+    this.namaCutiOnline,
+    this.nikCutiOnline,
+    this.statusKeluargaCutiOnline,
+    this.statusKaryawanCutiOnline,
+    this.tglMulaiBekerjaCutiOnline,
+    this.alamatCutiOnline,
+    this.membawaKeluargacutiOnline,
+    this.tglMembawaKeluargaCutiOnline,
+    this.atasanCutiOnline,
+    this.jenisCutiOnline,
+    this.tglMulaiCutiOnline,
+    this.tglSelesaiCutiOnline,
+    this.kodeCutiOnline,
+    this.tiketPesawatCutiOnline,
+    this.idVerifikasi,
+    this.atasanVerifikasi,
+    this.tglPengajuanCutiOnline,
+    this.waktuAtasanVerifikasi,
+    this.deptHeadVerifikasi,
+    this.waktuDeptHeadVerifikasi,
+    this.kttVerifikasi,
+    this.waktuKttVerifikasi,
+    this.userBatalVerifikasi,
+    this.hcVerifikasi,
+    this.waktuHcVerifikasi,
+    this.waktuBatalVerifikasi,
+    this.keteranganBatalVerifikasi,
+    this.namaBatal,
+    this.namaAtasan,
+    this.ttdAtasan,
+    this.namaDeptHead,
+    this.ttdDeptHead,
+    this.namaKtt,
+    this.ttdKtt,
+    this.namaHc,
+    this.ttdHc,
+    this.department,
+    this.extendCutiOnline,
+    this.cutiTahunanOnline,
+    this.tahunanDariCutiOnline,
+    this.tahunanSampaiCutiOnline,
+    this.userBatalPerpanjangan,
+    this.tglBatalPerpanjangan,
+    this.keteranganBatalPerpanjangan,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     idCutiOnline = json['idCutiOnline'];
@@ -197,6 +211,13 @@ class Data {
     namaHc = json['nama_hc'];
     ttdHc = json['ttd_hc'];
     department = json['department'];
+    extendCutiOnline = json['extendCutiOnline'];
+    cutiTahunanOnline = json['cutiTahunanOnline'];
+    tahunanDariCutiOnline = json['tahunanDariCutiOnline'];
+    tahunanSampaiCutiOnline = json['tahunanSampaiCutiOnline'];
+    userBatalPerpanjangan = json['userBatalPerpanjangan'];
+    tglBatalPerpanjangan = json['tglBatalPerpanjangan'];
+    keteranganBatalPerpanjangan = json['keteranganBatalPerpanjangan'];
   }
 
   Map<String, dynamic> toJson() {
@@ -239,6 +260,14 @@ class Data {
     data['nama_hc'] = namaHc;
     data['ttd_hc'] = ttdHc;
     data['department'] = department;
+    data['extendCutiOnline'] = extendCutiOnline;
+    data['cutiTahunanOnline'] = cutiTahunanOnline;
+    data['tahunanDariCutiOnline'] = tahunanDariCutiOnline;
+    data['tahunanSampaiCutiOnline'] = tahunanSampaiCutiOnline;
+    data['keteranganBatalVerifikasi'] = keteranganBatalVerifikasi;
+    data['userBatalPerpanjangan'] = userBatalPerpanjangan;
+    data['tglBatalPerpanjangan'] = tglBatalPerpanjangan;
+    data['keteranganBatalPerpanjangan'] = keteranganBatalPerpanjangan;
     return data;
   }
 }

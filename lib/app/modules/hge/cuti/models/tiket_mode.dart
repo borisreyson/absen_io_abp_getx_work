@@ -8,6 +8,10 @@ class TanggalCuti {
   String? tiketPesawat;
   String? berangkatDari;
   String? kembaliKe;
+  String? extendCuti;
+  String? cutiTahunan;
+  String? tahunanDari;
+  String? tahunanSampai;
   TanggalCuti({
     this.keluarga,
     this.tglKeluarga,
@@ -18,6 +22,10 @@ class TanggalCuti {
     this.tiketPesawat,
     this.berangkatDari,
     this.kembaliKe,
+    this.extendCuti,
+    this.cutiTahunan,
+    this.tahunanDari,
+    this.tahunanSampai,
   });
   factory TanggalCuti.fromJson(Map<String, dynamic> json) {
     return TanggalCuti(
@@ -30,6 +38,10 @@ class TanggalCuti {
       tiketPesawat: json['tiketPesawat'],
       berangkatDari: json['berangkatDari'],
       kembaliKe: json['kembaliKe'],
+      extendCuti: json['extendCuti'],
+      cutiTahunan: json['cutiTahunan'],
+      tahunanDari: json['tahunanDari'],
+      tahunanSampai: json['tahunanSampai'],
     );
   }
 
@@ -44,6 +56,10 @@ class TanggalCuti {
     data['tiketPesawat'] = tiketPesawat;
     data['berangkatDari'] = berangkatDari;
     data['kembaliKe'] = kembaliKe;
+    data['extendCuti'] = extendCuti;
+    data['cutiTahunan'] = cutiTahunan;
+    data['tahunanDari'] = tahunanDari;
+    data['tahunanSampai'] = tahunanSampai;
     return data;
   }
 }
